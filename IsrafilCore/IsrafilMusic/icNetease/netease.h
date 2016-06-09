@@ -17,8 +17,16 @@ public:
   std::string encryptID(std::string id);
   bool        SearchSong(std::string        name,
                          std::vector<Song>& rVecSongBase);
+  bool        FillMp3URL(Song& rSongBase);
+  std::string GetHMp3URL(Song& rSongBase);
+  bool        FillPicURL(Song& rSongBase);
+  std::string GetPicURL(Song& rSongBase);
+  bool        FillLyricsURL(Song& rSongBase);
+  std::string GetLyricsURL(Song& rSongBase);
+  std::string GetLyrics(Song& rSongBase);
 
 private:
+
   Israfil::Network::HttpClient *hc;
 };
 }

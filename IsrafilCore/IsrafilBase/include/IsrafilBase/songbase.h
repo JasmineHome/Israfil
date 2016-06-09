@@ -39,10 +39,14 @@ struct Song {
   int             sSource;
   bool            sOnly;
   vector<string>  sMp3URLs; // Mp3URL[0] is the highest bitrate
-  // vector<string> sLLURL; //Lossless Audio URL.
-  vector<string>sPicURLs;
-  vector<string>sLyricsURLs;
-  string        sDevString;
+  vector<string>  sLLURL;   // Lossless Audio URL.
+  vector<string>  sPicURLs;
+  vector<string>  sLyricsURLs;
+  string          sDevString;
+  bool            isMp3Filled      = false;
+  bool            isPicFilled      = false;
+  bool            isLyricsFilled   = false;
+  bool            isAlbumPicFilled = false;
 };
 
 typedef std::vector<Israfil::SongBase::Song>SongList;

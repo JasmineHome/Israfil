@@ -85,7 +85,7 @@ bool Netease::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
     tmpSB.sAlbum.aID     = ITS(neAlbum["id"].GetInt());
     tmpSB.sAlbum.aName   = neAlbum["name"].GetString();
     tmpSB.sAlbum.aPicURL = ITS(neAlbum["picId"].GetUint64());
-
+    tmpSB.sPicURLs.push_back(neAlbum["img1v1Url"].GetString());
     rVecSongBase.push_back(tmpSB);
     //dbg("finished");
   }
@@ -116,5 +116,11 @@ std::string Netease::encryptID(std::string dfsID)
   }
   return out_stream.str();
 }
+
+bool Netease::FillMp3URL(Song &rSongBase){
+    std::string rSongDetails = hc->HttpGet(Israfil::strfmt::Format(NESongInfo, rSongBase.sID));
+
+}
+
 }
 }

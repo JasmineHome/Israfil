@@ -16,5 +16,5 @@ TEST_CASE("Israfil::Netease Basic Tests - Search", "Netease") {
   // std::cout<<MD5("LOVE").toStr() <<std::endl;
   Netease *ne = new Netease();
 
-  std::cout << ne->encryptID("7997847581095246") << std::endl;
+  std::cout << ne->encryptID("7947270045631279") << std::endl;
 }

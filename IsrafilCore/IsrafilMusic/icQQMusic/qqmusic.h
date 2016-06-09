@@ -13,8 +13,15 @@ class ISRAFILCORE_API QQMusic {
 public:
 
   QQMusic();
-  bool SearchSong(std::string        name,
-                  std::vector<Song>& rVecSongBase);
+  bool        SearchSong(std::string        name,
+                         std::vector<Song>& rVecSongBase);
+  bool        FillMp3URL(Song& rSongBase);
+  std::string GetHMp3URL(Song& rSongBase);
+  bool        FillPicURL(Song& rSongBase);
+  std::string GetPicURL(Song& rSongBase);
+  bool        FillLyricsURL(Song& rSongBase);
+  std::string GetLyricsURL(Song& rSongBase);
+  std::string GetLyrics(Song& rSongBase);
 
 private:
 

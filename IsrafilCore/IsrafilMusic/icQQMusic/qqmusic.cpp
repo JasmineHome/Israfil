@@ -84,16 +84,20 @@ bool QQMusic::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
     tmpSB.sID        = FArray[FSongID];
     tmpSB.sDevString = FString;
     tmpSB.sMp3URLs.push_back(Israfil::strfmt::Format(QMHighMp3URL, tmpSB.sID));
+    tmpSB.isMp3Filled = true;
     tmpSB.sLyricsURLs.push_back(Israfil::strfmt::Format(QMLyricsURL, StringToInt(tmpSB.sID) % 100, tmpSB.sID));
+    tmpSB.isLyricsFilled = true;
     tmpSB.sPicURLs.push_back(Israfil::strfmt::Format(QMSongPicURL, FArray[FSongPicID].at(FArray[FSongPicID].length() - 2), FArray[FSongPicID].at(FArray[FSongPicID].length() - 1), FArray[FSongPicID]));
+    tmpSB.isPicFilled = true;
 
     tmpSB.sSource = srcQQMusic;
     tmpSB.uID     = Israfil::strfmt::Format("{0}{1}", tmpSB.sSource, tmpSB.sID);
     tmpSB.sOnly   = qlSong["only"].GetInt() == 1 ? true : false;
 
-    tmpSB.sAlbum.aID     = FArray[FAlbumID];
-    tmpSB.sAlbum.aName   = FArray[FAlbumName];
-    tmpSB.sAlbum.aPicURL = Israfil::strfmt::Format(QMAlbumPicURL, StringToInt(tmpSB.sAlbum.aID) % 100, tmpSB.sAlbum.aID);
+    tmpSB.sAlbum.aID       = FArray[FAlbumID];
+    tmpSB.sAlbum.aName     = FArray[FAlbumName];
+    tmpSB.sAlbum.aPicURL   = Israfil::strfmt::Format(QMAlbumPicURL, StringToInt(tmpSB.sAlbum.aID) % 100, tmpSB.sAlbum.aID);
+    tmpSB.isAlbumPicFilled = true;
 
     Musician tmpMSC;
     tmpMSC.mID   = FArray[FSingerID];
@@ -123,6 +127,37 @@ void QQMusic::SplitF(std::string FString, std::vector<std::string>& FArray) {
   while (std::getline(ss, item, '|')) {
     FArray.push_back(std::move(item));
   }
+}
+
+bool QQMusic::FillMp3URL(Song& rSongBase) {
+  if (rSongBase.isMp3Filled == true) return true;
+  else return false;  // by default its filled, so if not, throw a false;
+}
+
+bool QQMusic::FillLyricsURL(Song& rSongBase) {
+  if (rSongBase.isLyricsFilled == true) return true;
+  else return false;
+}
+
+bool QQMusic::FillPicURL(Song& rSongBase) {
+  if ((rSongBase.isPicFilled == true) && (rSongBase.isAlbumPicFilled == true)) return true;
+  else return false;
+}
+
+std::string QQMusic::GetHMp3URL(Song& rSongBase) {
+  if ((rSongBase.isMp3Filled == false) && (FillMp3URL(rSongBase) == true)) return rSongBase.sMp3URLs[0];
+  return rSongBase.sMp3URLs[0]; // TODO: fix potential indexoutofbound err;
+}
+
+std::string QQMusic::GetPicURL(Song& rSongBase) {
+  if ((rSongBase.isPicFilled == false) && (FillPicURL(rSongBase) == true)) return rSongBase.sPicURLs[0];
+  return rSongBase.sPicURLs[0]; // TODO: fix potential indexoutofbound err;
+  // TODO: add AlbumPic support;
+}
+
+std::string QQMusic::GetLyricsURL(Song& rSongBase) {
+  if ((rSongBase.isLyricsFilled == false) && (FillLyricsURL(rSongBase) == true)) return rSongBase.sLyricsURLs[0];
+  return rSongBase.sLyricsURLs[0];
 }
 }
 }

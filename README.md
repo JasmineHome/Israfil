@@ -24,18 +24,19 @@ _Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机
 ### [当前代码量统计](https://github.com/LER0ever/Israfil/blob/develop/doc/cloc.md)  
 已完成:  
 
-| 项目        | 协议       | 已完成                                             | 测试         | 完成时间   |
-| :---:       | :---:      | :---:                                              | :---:        | :---:      |
-| IsrafilCore | 网易云音乐 | 完成网易搜索，整合进Universal Search，结果尚未排序 | test-search  | 2016-06-08 |
-| IsrafilCore | 网易云音乐 | 原API通过EncryptID及dfsID计算MP3下载地址           | test-netease | 2016-06-07 |
-| IsrafilCore | HTTPClient | 自定义header进行HTTP POST, 初步的网易搜索获得json  | test-network | 2016-06-06 |
-| IsrafilCore | QQ音乐     | 整合音乐结果到Universal Search并加入Json           | test-qqmusic | 2016-06-04 |
-| IsrafilCore | Universal  | SongList搜索结果重编码为Json供qml调用              | test-qqmusic | 2016-06-04 |
-| Israfil     | 持续集成   | 完成全自动化编译+上传二进制文件                    | -            | 2016-06-03 |
-| IsrafilCore | Universal  | 封装QQ搜索至IsrafilCore                            | test-core    | 2016-06-02 |
-| IsrafilCore | QQ音乐     | 获得歌曲歌词、专辑图片及下载链接(包括无损)         | test-qqmusic | 2016-06-02 |
-| IsrafilCore | HTTPClient | 自定义header发送GET请求                            | test-network | 2016-05-28 |
-| HTTPAPI     | QQ&网易    | 搜索歌曲获得详细信息以及获得下载链接               | -            | 2016-04-15 |
+| 项目        | 协议       | 已完成                                              | 测试         | 完成时间   |
+| :---:       | :---:      | :---:                                               | :---:        | :---:      |
+| IsrafilCore | 网易& QQ   | 增加获取mp3，图片歌词的函数, 网易的加密暂时用Py实现 | -            | 2016-06-09 |
+| IsrafilCore | 网易云音乐 | 完成网易搜索，整合进Universal Search，结果尚未排序  | test-search  | 2016-06-08 |
+| IsrafilCore | 网易云音乐 | 原API通过EncryptID及dfsID计算MP3下载地址            | test-netease | 2016-06-07 |
+| IsrafilCore | HTTPClient | 自定义header进行HTTP POST, 初步的网易搜索获得json   | test-network | 2016-06-06 |
+| IsrafilCore | QQ音乐     | 整合音乐结果到Universal Search并加入Json            | test-qqmusic | 2016-06-04 |
+| IsrafilCore | Universal  | SongList搜索结果重编码为Json供qml调用               | test-qqmusic | 2016-06-04 |
+| Israfil     | 持续集成   | 完成全自动化编译+上传二进制文件                     | -            | 2016-06-03 |
+| IsrafilCore | Universal  | 封装QQ搜索至IsrafilCore                             | test-core    | 2016-06-02 |
+| IsrafilCore | QQ音乐     | 获得歌曲歌词、专辑图片及下载链接(包括无损)          | test-qqmusic | 2016-06-02 |
+| IsrafilCore | HTTPClient | 自定义header发送GET请求                             | test-network | 2016-05-28 |
+| HTTPAPI     | QQ&网易    | 搜索歌曲获得详细信息以及获得下载链接                | -            | 2016-04-15 |
 进行中(按优先级排列):  
 
 | 项目        | 协议       | 功能                                                                                        | 完成情况 | 开始时间   |

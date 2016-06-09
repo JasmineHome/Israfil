@@ -6,7 +6,7 @@
 using std::ostringstream;
 namespace json = rapidjson;
 
-#define ITS(x) Israfil::strfmt::Format("{0}", x) //Int To String using strfmt
+#define ITS(x) Israfil::strfmt::Format("{0}", x) // Int To String using strfmt
 
 namespace Israfil {
 namespace Netease {
@@ -68,7 +68,8 @@ bool Netease::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
     json::Value& neArtists = neSong["artists"];
 
     if (neArtists.IsArray() == false) { dbgerr(neArtists.GetType()); return false; }
-    dbg(neArtists.Size());
+      dbg(neArtists.Size());
+
     for (int j = 0; j < neArtists.Size(); j++) { // iteration for artists
       dbg(j);
       json::Value& neMusician = neArtists[j];
@@ -81,17 +82,99 @@ bool Netease::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
 
     json::Value& neAlbum = neSong["album"];
     Album tmpAB;
-    dbg(neAlbum["id"].GetInt());
-    tmpSB.sAlbum.aID     = ITS(neAlbum["id"].GetInt());
-    tmpSB.sAlbum.aName   = neAlbum["name"].GetString();
-    tmpSB.sAlbum.aPicURL = ITS(neAlbum["picId"].GetUint64());
-    tmpSB.sPicURLs.push_back(neAlbum["img1v1Url"].GetString());
+      dbg(neAlbum["id"].GetInt());
+    tmpSB.sAlbum.aID   = ITS(neAlbum["id"].GetInt());
+    tmpSB.sAlbum.aName = neAlbum["name"].GetString();
+
+    /*For Netease, Slot1 stores PicID*/
+      dbg(ITS(neAlbum["picId"].GetUint64()));
+    tmpSB.sSlot1 = ITS(neAlbum["picId"].GetUint64());
+
+    // dbg(neAlbum["img1v1Url"].GetString());
+    // tmpSB.sPicURLs.push_back(neAlbum["img1v1Url"].GetString());
     rVecSongBase.push_back(tmpSB);
-    //dbg("finished");
+
+    // dbg("finished");
   }
 
   return true;
 }
+
+// Fill the Mp3 URL by HTTP get the song detail page
+bool Netease::FillMp3URL(Song& rSongBase) {
+  std::string rSongDetails = hc->HttpGet(Israfil::strfmt::Format(NESongInfo, rSongBase.sID));
+
+      dbg(Israfil::strfmt::Format(NESongInfo, rSongBase.sID));
+      dbg(rSongDetails);
+  json::Document doc;
+  doc.Parse<0>(rSongDetails.c_str());
+
+  if (doc.HasParseError()) {
+    json::ParseErrorCode code = doc.GetParseError();
+    dbgerr(code);
+    return false;
+  }
+  json::Value& nCode = doc["code"];
+
+  if ((nCode.IsInt() == false) || (nCode.GetInt() != 200)) { dbgerr(nCode.GetInt()); return false; }
+  dbg(nCode.GetInt());
+
+  json::Value& nSongs = doc["songs"]; // TODO: add err handle;
+  assert(nSongs.IsArray());
+      dbg(nSongs.Size());
+  json::Value& nSong = nSongs[0];
+      dbg("nSong SUC");
+
+  if (nSong.HasMember("hMusic")) {
+      dbg("hMusic SUC");
+    json::Value& hMusic = nSong["hMusic"];
+      dbg("hMusic SUC2");
+
+    if (hMusic.IsNull() == false && hMusic.HasMember("dfsId")) {
+      dbg("IF dfsId SUC");
+      json::Value& dfsId = hMusic["dfsId"];
+      dbg("dfsId SUC");
+      std::string did = ITS(dfsId.GetUint64());
+      rSongBase.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, hMusic["extension"].GetString()));
+    }
+  }
+
+  if (nSong.HasMember("mMusic")) {
+    json::Value& mMusic = nSong["mMusic"];
+
+    if (mMusic.IsNull() == false && mMusic.HasMember("dfsId")) {
+      json::Value& dfsId = mMusic["dfsId"];
+      std::string  did   = ITS(dfsId.GetUint64());
+      rSongBase.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, mMusic["extension"].GetString()));
+    }
+  }
+
+  if (nSong.HasMember("lMusic")) {
+    json::Value& lMusic = nSong["lMusic"];
+
+    if (lMusic.IsNull() == false && lMusic.HasMember("dfsId")) {
+      json::Value& dfsId = lMusic["dfsId"];
+      std::string  did   = ITS(dfsId.GetUint64());
+      rSongBase.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, lMusic["extension"].GetString()));
+    }
+  }
+
+  if (nSong.HasMember("bMusic")) {
+    json::Value& bMusic = nSong["bMusic"];
+
+    if (bMusic.IsNull() == false && bMusic.HasMember("dfsId")) {
+      json::Value& dfsId = bMusic["dfsId"];
+      std::string  did   = ITS(dfsId.GetUint64());
+      rSongBase.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, bMusic["extension"].GetString()));
+    }
+  }
+
+  rSongBase.isMp3Filled = true;
+  return true;
+}
+
+bool        Netease::FillPicURL(Song& rSongBase)
+{}
 
 std::string Netease::encryptID(std::string dfsID)
 {
@@ -116,11 +199,5 @@ std::string Netease::encryptID(std::string dfsID)
   }
   return out_stream.str();
 }
-
-bool Netease::FillMp3URL(Song &rSongBase){
-    std::string rSongDetails = hc->HttpGet(Israfil::strfmt::Format(NESongInfo, rSongBase.sID));
-
-}
-
 }
 }

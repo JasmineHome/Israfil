@@ -43,6 +43,8 @@ struct Song {
   vector<string>  sPicURLs;
   vector<string>  sLyricsURLs;
   string          sDevString;
+  string          sSlot1;
+  string          sSlot2;
   bool            isMp3Filled      = false;
   bool            isPicFilled      = false;
   bool            isLyricsFilled   = false;

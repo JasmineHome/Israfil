@@ -21,4 +21,4 @@ HEADERS += \
 SOURCES += \
     netease.cpp
 
-DISTFILES += cipher_boltzmann.py
+DISTFILES += cipher-boltzmann.py

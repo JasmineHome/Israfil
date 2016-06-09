@@ -24,6 +24,12 @@ TEST_CASE("Israfil::Core Basic Tests - Search", "QQMusic and Netease") {
   std::cin >> SearchNameInput;
   qm->SearchSong(SearchNameInput, ret);
   ne->SearchSong(SearchNameInput, ret);
+  dbg("search complete");
+  for (int i=0; i<ret.size(); i++){
+      if (ret[i].sSource == srcNetease){
+          ne->FillMp3URL(ret[i]);
+      }
+  }
   dbg(ret.size());
 
   /*

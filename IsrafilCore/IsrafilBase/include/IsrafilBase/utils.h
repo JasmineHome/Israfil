@@ -41,6 +41,48 @@ namespace Base {
   << (x)                     \
   << std::endl               \
   << std::endl
+# define everWarn(x) std::cout             \
+  << "\033[33mIsrafilDBG::Warning::\033[0m" \
+  << __FUNCTION__                          \
+  << "() "                                 \
+  << "@ "                                  \
+  << __TIMESTAMP__                         \
+  << "\n"                                  \
+  << __FILE__                              \
+  << " L"                                  \
+  << __LINE__                              \
+  << " \n Warning MSG:"                    \
+  << (x)                                   \
+  << std::endl                             \
+  << std::endl
+# define everErr(x) std::cout            \
+  << "\033[31mIsrafilDBG::ERROR::\033[0m" \
+  << __FUNCTION__                        \
+  << "() "                               \
+  << "@ "                                \
+  << __TIMESTAMP__                       \
+  << "\n"                                \
+  << __FILE__                            \
+  << " L"                                \
+  << __LINE__                            \
+  << " \n Error MSG:"                    \
+  << (x)                                 \
+  << std::endl                           \
+  << std::endl
+# define everMsg(x) std::cout          \
+  << "\033[32mIsrafilDBG::Msg::\033[0m" \
+  << __FUNCTION__                      \
+  << "() "                             \
+  << "@ "                              \
+  << __TIMESTAMP__                     \
+  << "\n"                              \
+  << __FILE__                          \
+  << " L"                              \
+  << __LINE__                          \
+  << " \n Notice:"                     \
+  << (x)                               \
+  << std::endl                         \
+  << std::endl
 #endif // ifdef ISRAFILDBG
 #ifdef ISRAFILDBGSILENT
 # define dbg(x)

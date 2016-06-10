@@ -6,9 +6,9 @@
 #define ISRAFILCORE_AUTHOR_MAINTAINER   "etasry@gmail.com"
 
 #define ISRAFILCORE_VERSION_MAJOR       "0"
-#define ISRAFILCORE_VERSION_MINOR       "1"
-#define ISRAFILCORE_VERSION_PATCH       "3"
+#define ISRAFILCORE_VERSION_MINOR       "2"
+#define ISRAFILCORE_VERSION_PATCH       "2"
 #define ISRAFILCORE_VERSION_REVISION    "PRE-release" // Doesn't have a revison while in pre-alpha
 
-#define ISRAFILCORE_VERSION             "0.1.3"
-#define ISRAFILCORE_NAME_VERSION        "IsrafilCore v0.1.3 (PRE-release)"
+#define ISRAFILCORE_VERSION             "0.2.2"
+#define ISRAFILCORE_NAME_VERSION        "IsrafilCore v0.2.2 (PRE-release)"

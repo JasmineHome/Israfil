@@ -15,9 +15,9 @@ Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的�
 如本项目有侵权行为，请和我联系，我会立刻删除Repo  
 
 ## 关于这个项目
-IsrafilCore: (./IsrafilCore)C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**早期开发中**  
-Israfil App: Qt, QML, Material Design, **超早期开发中**。  
-_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API **目前完成了网易和qq的搜索与下载地址获取**_
+IsrafilCore: (./IsrafilCore)C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**开发中**  
+Israfil App: Qt, QML, Material Design, **早期开发中**。  
+~~_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API **目前完成了网易和qq的搜索与下载地址获取**_~~
 
 ## Israfil 进度  
 ### **[开发日志及当前运行效果（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**  
@@ -26,7 +26,8 @@ _Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机
 
 | 项目        | 协议       | 已完成                                              | 测试         | 完成时间   |
 | :---:       | :---:      | :---:                                               | :---:        | :---:      |
-| IsrafilCore | 网易云音乐 | 获取Mp3地址函数生效，并以合并入search               | test-search  | 2016-06-09 |
+| IsrafilCore | 网易云音乐 | 获取图片和歌词地址                                  | test-netease | 2016-06-10 |
+| IsrafilCore | 网易云音乐 | 获取Mp3地址函数生效，并合并入search                 | test-search  | 2016-06-09 |
 | IsrafilCore | 网易& QQ   | 增加获取mp3，图片歌词的函数, 网易的加密暂时用Py实现 | -            | 2016-06-09 |
 | IsrafilCore | 网易云音乐 | 完成网易搜索，整合进Universal Search，结果尚未排序  | test-search  | 2016-06-08 |
 | IsrafilCore | 网易云音乐 | 原API通过EncryptID及dfsID计算MP3下载地址            | test-netease | 2016-06-07 |
@@ -42,7 +43,6 @@ _Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机
 
 | 项目        | 协议       | 功能                                                                                        | 完成情况 | 开始时间   |
 | :---:       | :---:      | :---:                                                                                       | :---:    | :---:      |
-| IsrafilCore | 网易云音乐 | 搜索歌曲                                                                                    | 80%      | 2016-05-28 |
 | IsrafilApp  | UI         | Qml-Material 界面设计，可能需要手动维护一份[Fork](https://github.com/LER0ever/qml-material) | 30%      | 2016-06-05 |
 | IsrafilApp  | Qml<->C++  | C++ 和 QML之间的caodan通讯 :(                                                               | 30%      | 2016-06-04 |
 | IsrafilCore | 虾米音乐   | 协议研究                                                                                    | 60%      | 2016-05-28 |

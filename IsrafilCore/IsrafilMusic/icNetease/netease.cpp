@@ -130,7 +130,7 @@ bool Netease::FillMp3URL(Song& rSongBase) {
     json::Value& hMusic = nSong["hMusic"];
       dbg("hMusic SUC2");
 
-    if (hMusic.IsNull() == false && hMusic.HasMember("dfsId")) {
+    if ((hMusic.IsNull() == false) && hMusic.HasMember("dfsId")) {
       dbg("IF dfsId SUC");
       json::Value& dfsId = hMusic["dfsId"];
       dbg("dfsId SUC");
@@ -142,7 +142,7 @@ bool Netease::FillMp3URL(Song& rSongBase) {
   if (nSong.HasMember("mMusic")) {
     json::Value& mMusic = nSong["mMusic"];
 
-    if (mMusic.IsNull() == false && mMusic.HasMember("dfsId")) {
+    if ((mMusic.IsNull() == false) && mMusic.HasMember("dfsId")) {
       json::Value& dfsId = mMusic["dfsId"];
       std::string  did   = ITS(dfsId.GetUint64());
       rSongBase.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, mMusic["extension"].GetString()));
@@ -152,7 +152,7 @@ bool Netease::FillMp3URL(Song& rSongBase) {
   if (nSong.HasMember("lMusic")) {
     json::Value& lMusic = nSong["lMusic"];
 
-    if (lMusic.IsNull() == false && lMusic.HasMember("dfsId")) {
+    if ((lMusic.IsNull() == false) && lMusic.HasMember("dfsId")) {
       json::Value& dfsId = lMusic["dfsId"];
       std::string  did   = ITS(dfsId.GetUint64());
       rSongBase.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, lMusic["extension"].GetString()));
@@ -162,7 +162,7 @@ bool Netease::FillMp3URL(Song& rSongBase) {
   if (nSong.HasMember("bMusic")) {
     json::Value& bMusic = nSong["bMusic"];
 
-    if (bMusic.IsNull() == false && bMusic.HasMember("dfsId")) {
+    if ((bMusic.IsNull() == false) && bMusic.HasMember("dfsId")) {
       json::Value& dfsId = bMusic["dfsId"];
       std::string  did   = ITS(dfsId.GetUint64());
       rSongBase.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, bMusic["extension"].GetString()));
@@ -173,8 +173,76 @@ bool Netease::FillMp3URL(Song& rSongBase) {
   return true;
 }
 
-bool        Netease::FillPicURL(Song& rSongBase)
-{}
+bool Netease::FillPicURL(Song& rSongBase)
+{
+  if (rSongBase.isPicFilled) everWarn("Pic Already Filled");
+
+  if (rSongBase.sSlot1.length() < 5) {
+    everErr("sSlot1 is somewhat not set");
+    return false;
+  }
+
+  rSongBase.sPicURLs.push_back(Israfil::strfmt::Format(NEPicURL, encryptID(rSongBase.sSlot1), rSongBase.sSlot1));
+  rSongBase.isPicFilled = true;
+  return true;
+}
+
+bool Netease::FillLyricsURL(Song& rSongBase)
+{
+  if (rSongBase.isLyricsFilled) everWarn("Lyrics Already Filled");
+  rSongBase.sLyricsURLs.push_back(Israfil::strfmt::Format(NELyricsURL, rSongBase.sID));
+  rSongBase.isLyricsFilled = true;
+  everMsg("Lyrics Filled");
+  return true;
+}
+
+std::string Netease::GetHMp3URL(Song& rSongBase) // get the highest bitrate mp3
+{
+  if (rSongBase.isMp3Filled == false) {
+    everWarn("Mp3 URL not filled, filling it now.");
+
+    if (FillMp3URL(rSongBase) == true) ;
+    else { everErr("Fill Mp3 URL error"); return ""; }
+  }
+
+  if (rSongBase.sMp3URLs.size() > 0) return rSongBase.sMp3URLs[0];
+  else { everErr("No Mp3 URL Available"); return ""; }
+}
+
+std::string Netease::GetLyricsURL(Song& rSongBase)
+{
+  if (rSongBase.isLyricsFilled == false) {
+    everWarn("Lyrics not filled, filling it now");
+
+    if (FillLyricsURL(rSongBase) == true) ;
+    else { everErr("Fill Lyrics URL error"); return ""; }
+  }
+
+  if (rSongBase.sLyricsURLs.size() > 0) return rSongBase.sLyricsURLs[0];
+  else { everErr("No Lyrics Available"); return ""; }
+}
+
+std::string Netease::GetPicURL(Song& rSongBase)
+{
+  if (rSongBase.isPicFilled == false) {
+    everWarn("PicURL not filled, filling it now");
+
+    if (FillPicURL(rSongBase) == false) {
+      everErr("Fill PicURL error");
+      return "";
+    }
+  }
+
+  if (rSongBase.sPicURLs.size() > 0) return rSongBase.sLyricsURLs[0];
+  else { everErr("No Pic Available"); return ""; }
+}
+
+std::string Netease::GetLyrics(Song& rSongBase)
+{
+  std::string rLyrics = hc->HttpGet(GetLyricsURL(rSongBase));
+
+  return rLyrics;
+}
 
 std::string Netease::encryptID(std::string dfsID)
 {

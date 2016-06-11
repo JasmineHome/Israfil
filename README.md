@@ -65,6 +65,7 @@ OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载
 ```
 git clone https://github.com/LER0ever/Israfil
 cd Israfil && mkdir build  
+git submodule update --init --recursive #obtain qml-material
 cd build && qmake ..
 make
 ```

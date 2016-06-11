@@ -1,0 +1,3 @@
+[submodule "IsrafilApp/quick/material"]
+	path = IsrafilApp/quick/material
+	url = https://github.com/LER0ever/qml-material.git

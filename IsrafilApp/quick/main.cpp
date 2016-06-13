@@ -5,7 +5,8 @@
 
 #include <QDebug>
 
-// #include "../Material/src/plugin.h"
+#include "material/src/plugin.h"
+
 // #include "backendmodel.h"
 // #include "pluginloader.h"
 // #include "pluginmgr.h"
@@ -28,13 +29,10 @@ int main(int argc, char *argv[])
   engine.addImportPath("qrc:/QtQuick");
   engine.addImportPath("qrc:/QtQuick/Controls/Styles/Material");
 
-  // / }
-  // / {
-  // MaterialPlugin qmlMaterial;
-  // qmlMaterial.registerTypes("Material");
-  // / }
+  MaterialPlugin qmlMaterial;
+  qmlMaterial.registerTypes("Material");
 
-  engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+  engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
   // QStringList plugins;
   // IsrafilCore *pIC = new IsrafilCore();

@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>BottomSheetUI.qml</file>
+        <file>ButtonUI.qml</file>
+        <file>CheckBoxUI.qml</file>
+        <file>ColorPaletteUI.qml</file>
+        <file>CustomIconsUI.qml</file>
+        <file>DatePickerUI.qml</file>
+        <file>DialogUI.qml</file>
+        <file>FormsUI.qml</file>
+        <file>ListItemsUI.qml</file>
+        <file>PageStackUI.qml</file>
+        <file>ProgressBarUI.qml</file>
+        <file>RadioButtonUI.qml</file>
+        <file>SidebarPage.qml</file>
+        <file>SliderUI.qml</file>
+        <file>SubPage.qml</file>
+        <file>SwitchUI.qml</file>
+        <file>TextFieldUI.qml</file>
+        <file>TimePickerUI.qml</file>
+        <file>TypographyUI.qml</file>
+        <file>images/balloon.jpg</file>
+        <file>images/go-last.color.svg</file>
+        <file>images/list-add.color.svg</file>
+        <file>images/weather-pouring.svg</file>
+        <file>images/weather-sunset.svg</file>
+        <file>main.qml</file>
+    </qresource>
+</RCC>

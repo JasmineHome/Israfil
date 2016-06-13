@@ -26,6 +26,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 
 | 项目        | 协议       | 已完成                                              | 测试         | 完成时间   |
 | :---:       | :---:      | :---:                                               | :---:        | :---:      |
+| IsrafilApp  | UI         | Material Design界面初步                             | IsrafilApp   | 2016-06-13 |
 | IsrafilCore | 网易云音乐 | 获取图片和歌词地址                                  | test-netease | 2016-06-10 |
 | IsrafilCore | 网易云音乐 | 获取Mp3地址函数生效，并合并入search                 | test-search  | 2016-06-09 |
 | IsrafilCore | 网易& QQ   | 增加获取mp3，图片歌词的函数, 网易的加密暂时用Py实现 | -            | 2016-06-09 |

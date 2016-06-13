@@ -36,6 +36,7 @@ script:
 #    - cd HttpAPI
 #    - ./build.sh
 #    - cd ..
+    - git submodule update --init --recursive
     - echo "Building for ${MKSPEC} in ${BUILD_MODE} mode..."
     - mkdir build
     - cd build

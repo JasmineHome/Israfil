@@ -25,5 +25,6 @@
         <file>images/weather-pouring.svg</file>
         <file>images/weather-sunset.svg</file>
         <file>main.qml</file>
+        <file>searchUniversalUI.qml</file>
     </qresource>
 </RCC>

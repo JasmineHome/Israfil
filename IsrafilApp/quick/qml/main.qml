@@ -29,14 +29,18 @@ ApplicationWindow {
         "Bottom Sheet", "Dialog", "Forms", "List Items", "Page Stack", "Time Picker", "Date Picker"
     ]
 
-    property var isrSearch: [
-        "searchUniversal", "searchNetease", "searchQQMusic"
+    property var tabSearch: [
+        "searchUniversal", "searchNetease", "searchQQMusic", "searchTTPod", "searchKugou"
+    ]
+
+    property var tabSongList: [
+        "To Be Loaded"
     ]
 
 
-    property var sections: [ isrSearch, basicComponents, styles, compoundComponents ] //section name english
+    property var sections: [ tabSearch, tabSongList, basicComponents, styles, compoundComponents ] //section name english
 
-    property var sectionTitles: [ "搜索", "Basic Components", "Style", "Compound Components" ]
+    property var sectionTitles: [ "搜索", "歌单","Basic Components", "Style", "Compound Components" ]
 
     property string selectedComponent: sections[0][0]
     property string selectedSection: sectionTitles[0]
@@ -44,7 +48,9 @@ ApplicationWindow {
         var namemap = {
             searchUniversal:'全网',
             searchNetease: '网易云音乐',
-            searchQQMusic: 'QQ音乐'
+            searchQQMusic: 'QQ音乐',
+            searchTTPod: '天天动听',
+            searchKugou: '酷狗音乐'
         }
         if (namemap[comp] === undefined) return comp;
         return namemap[comp];
@@ -242,7 +248,6 @@ ApplicationWindow {
                             text: displayName(modelData)//CHANGED modelData
                             selected: modelData == selectedComponent
                             onClicked: {
-
                                 selectedComponent = modelData
                                 //selectedSection = section.name
                                 console.log(selectedComponent, selectedSection, section)
@@ -287,4 +292,96 @@ ApplicationWindow {
             }
         }
     }
+
+    Rectangle {
+        color:'#fff'
+        height:dp(80)
+        width:parent.width
+        anchors.bottom: parent.bottom
+        border.width:  dp(1)
+        border.color: Theme.alpha("#aaa", 0.26)
+
+        Rectangle {
+            color:'#fff'
+            height:50
+        }
+
+        Label {
+            id: songPlaying
+            text: "没有正在播放的歌曲"
+            //anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            height:dp(40)
+            anchors.left: seeker.left
+            width:dp(100)
+            color: Theme.light.textColor
+        }
+
+        Slider {
+            id: seeker
+            width: parent.width - dp(50)
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            height:50
+            value: 0
+            darkBackground: false
+            updateValueWhileDragging: true
+            color:theme.primaryColor
+            anchors.rightMargin: dp(50)
+            anchors.leftMargin:dp(50)
+            anchors.bottomMargin:dp(190)
+
+            onValueChanged: {
+                //TODO
+            }
+        }
+    }
+    Rectangle {
+
+        anchors.bottomMargin: dp(0)
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        height:dp(40)
+        width:dp(210)
+
+        IconButton {
+            iconName: 'av/skip_previous'
+            height:dp(35)
+            width:dp(70)
+            id: prevButton
+            anchors.left: parent.left
+            size: dp(30)
+            onClicked: {
+
+            }
+        }
+
+        IconButton {
+            iconName: 'av/play_arrow'
+            height:dp(35)
+            width:dp(70)
+            id: playButton1
+            anchors.left: prevButton.right
+            size: dp(30)
+            onClicked: {
+
+            }
+
+        }
+
+        IconButton {
+            iconName: 'av/skip_next'
+            height:dp(35)
+            width:dp(70)
+            id: nextButton
+            anchors.left: playButton1.right
+            size: dp(30)
+
+            onClicked: {
+
+            }
+        }
+
+    }
+
 }

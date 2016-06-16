@@ -18,6 +18,7 @@ Item {
 
         TextField {
             placeholderText: "Search..."
+            floatingLabel: true
             anchors.horizontalCenter: parent.horizontalCenter
         }
 

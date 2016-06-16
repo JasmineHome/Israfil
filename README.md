@@ -20,14 +20,14 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 ~~_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API **目前完成了网易和qq的搜索与下载地址获取**_~~
 
 ## Israfil 进度  
-### **[开发日志及当前运行效果（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**
+### **[开发日志及当前运行截图（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**
 **由于项目在早期开发，您可以点右上[Watch](https://github.com/LER0ever/Israfil/subscription)接收项目开发动态提醒**
 ### [当前代码量统计](https://github.com/LER0ever/Israfil/blob/develop/doc/cloc.md)  
 已完成:  
 
 | 项目        | 协议       | 已完成                                              | 测试         | 完成时间   |
 | :---:       | :---:      | :---:                                               | :---:        | :---:      |
-| IsrafilApp  | UI         | 界面中英文映射                                      | IsrafilApp   | 2016-06-16 |
+| IsrafilApp  | UI         | 界面中英文映射&UI初步框架                           | IsrafilApp   | 2016-06-16 |
 | IsrafilApp  | UI         | Material Design界面初步                             | IsrafilApp   | 2016-06-13 |
 | IsrafilCore | 网易云音乐 | 获取图片和歌词地址                                  | test-netease | 2016-06-10 |
 | IsrafilCore | 网易云音乐 | 获取Mp3地址函数生效，并合并入search                 | test-search  | 2016-06-09 |

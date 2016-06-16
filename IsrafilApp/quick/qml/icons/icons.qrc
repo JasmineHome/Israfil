@@ -48,4 +48,11 @@
 	<file alias="arrow_drop_down.svg">navigation_arrow_drop_down.svg</file>
 </qresource>
 
+<qresource prefix="/icons/av">
+	<file alias="pause.svg">av_pause.svg</file>
+	<file alias="play_arrow.svg">av_play_arrow.svg</file>
+	<file alias="skip_next.svg">av_skip_next.svg</file>
+	<file alias="skip_previous.svg">av_skip_previous.svg</file>
+</qresource>
+
 </RCC>

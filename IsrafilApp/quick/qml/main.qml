@@ -17,23 +17,38 @@ ApplicationWindow {
     }
 
     property var styles: [
-            "Custom Icons", "Color Palette", "Typography"
+        "Custom Icons", "Color Palette", "Typography"
     ]
 
     property var basicComponents: [
-            "Button", "CheckBox", "Progress Bar", "Radio Button",
-            "Slider", "Switch", "TextField"
+        "Button", "CheckBox", "Progress Bar", "Radio Button",
+        "Slider", "Switch", "TextField"
     ]
 
     property var compoundComponents: [
-            "Bottom Sheet", "Dialog", "Forms", "List Items", "Page Stack", "Time Picker", "Date Picker"
+        "Bottom Sheet", "Dialog", "Forms", "List Items", "Page Stack", "Time Picker", "Date Picker"
     ]
 
-    property var sections: [ basicComponents, styles, compoundComponents ]
+    property var isrSearch: [
+        "searchUniversal", "searchNetease", "searchQQMusic"
+    ]
 
-    property var sectionTitles: [ "Basic Components", "Style", "Compound Components" ]
+
+    property var sections: [ isrSearch, basicComponents, styles, compoundComponents ] //section name english
+
+    property var sectionTitles: [ "搜索", "Basic Components", "Style", "Compound Components" ]
 
     property string selectedComponent: sections[0][0]
+    property string selectedSection: sectionTitles[0]
+    function displayName(comp){
+        var namemap = {
+            searchUniversal:'全网',
+            searchNetease: '网易云音乐',
+            searchQQMusic: 'QQ音乐'
+        }
+        if (namemap[comp] === undefined) return comp;
+        return namemap[comp];
+    }
 
     initialPage: TabbedPage {
         id: page
@@ -110,7 +125,7 @@ ApplicationWindow {
                             Repeater {
                                 model: modelData
                                 delegate: ListItem.Standard {
-                                    text: modelData
+                                    text: displayName(modelData) //CHANGED modelData
                                     selected: modelData == israpp.selectedComponent
                                     onClicked: {
                                         israpp.selectedComponent = modelData
@@ -132,6 +147,7 @@ ApplicationWindow {
 
                 property string selectedComponent: modelData[0]
                 property var section: modelData
+                property string selectedSection: sectionTitles[index]
 
                 sourceComponent: tabDelegate
             }
@@ -186,15 +202,15 @@ ApplicationWindow {
 
                         onPressed: {
                             switch(selection.selectedIndex) {
-                                case 0:
-                                    theme.primaryColor = parent.color
-                                    break;
-                                case 1:
-                                    theme.accentColor = parent.color
-                                    break;
-                                case 2:
-                                    theme.backgroundColor = parent.color
-                                    break;
+                            case 0:
+                                theme.primaryColor = parent.color
+                                break;
+                            case 1:
+                                theme.accentColor = parent.color
+                                break;
+                            case 2:
+                                theme.backgroundColor = parent.color
+                                break;
                             }
                         }
                     }
@@ -223,9 +239,15 @@ ApplicationWindow {
                     Repeater {
                         model: section
                         delegate: ListItem.Standard {
-                            text: modelData
+                            text: displayName(modelData)//CHANGED modelData
                             selected: modelData == selectedComponent
-                            onClicked: selectedComponent = modelData
+                            onClicked: {
+
+                                selectedComponent = modelData
+                                //selectedSection = section.name
+                                console.log(selectedComponent, selectedSection, section)
+                            }
+
                         }
                     }
                 }

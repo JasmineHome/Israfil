@@ -20,12 +20,14 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 ~~_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API **目前完成了网易和qq的搜索与下载地址获取**_~~
 
 ## Israfil 进度  
-### **[开发日志及当前运行效果（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**  
+### **[开发日志及当前运行效果（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**
+**由于项目在早期开发，您可以点右上[Watch](https://github.com/LER0ever/Israfil/subscription)接收项目开发动态提醒**
 ### [当前代码量统计](https://github.com/LER0ever/Israfil/blob/develop/doc/cloc.md)  
 已完成:  
 
 | 项目        | 协议       | 已完成                                              | 测试         | 完成时间   |
 | :---:       | :---:      | :---:                                               | :---:        | :---:      |
+| IsrafilApp  | UI         | 界面中英文映射                                      | IsrafilApp   | 2016-06-16 |
 | IsrafilApp  | UI         | Material Design界面初步                             | IsrafilApp   | 2016-06-13 |
 | IsrafilCore | 网易云音乐 | 获取图片和歌词地址                                  | test-netease | 2016-06-10 |
 | IsrafilCore | 网易云音乐 | 获取Mp3地址函数生效，并合并入search                 | test-search  | 2016-06-09 |
@@ -44,7 +46,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 
 | 项目        | 协议       | 功能                                                                                        | 完成情况 | 开始时间   |
 | :---:       | :---:      | :---:                                                                                       | :---:    | :---:      |
-| IsrafilApp  | UI         | Qml-Material 界面设计，可能需要手动维护一份[Fork](https://github.com/LER0ever/qml-material) | 30%      | 2016-06-05 |
+| IsrafilApp  | UI         | Qml-Material 界面设计，可能需要手动维护一份[Fork](https://github.com/LER0ever/qml-material) | 50%      | 2016-06-05 |
 | IsrafilApp  | Qml<->C++  | C++ 和 QML之间的caodan通讯 :(                                                               | 30%      | 2016-06-04 |
 | IsrafilCore | 虾米音乐   | 协议研究                                                                                    | 60%      | 2016-05-28 |
 | IsrafilAPP  | UI         | qml-material 初步界面demo 及 qml文件的资源打包                                              | 60%      | 2016-05-13 |

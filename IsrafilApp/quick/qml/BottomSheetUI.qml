@@ -36,7 +36,7 @@ Item {
         id: actionSheet
 
         title: "Demo!"
-
+        z: 100
         actions: [
             Action {
                 iconName: "social/share"

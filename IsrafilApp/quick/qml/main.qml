@@ -44,6 +44,7 @@ ApplicationWindow {
 
     property string selectedComponent: sections[0][0]
     property string selectedSection: sectionTitles[0]
+    property int bottomHeight: 65
     function displayName(comp){
         var namemap = {
             searchUniversal:'全网',
@@ -55,9 +56,9 @@ ApplicationWindow {
         if (namemap[comp] === undefined) return comp;
         return namemap[comp];
     }
-
     initialPage: TabbedPage {
         id: page
+
 
         title: "Israfil Demo"
 
@@ -110,7 +111,11 @@ ApplicationWindow {
             onEnabledChanged: smallLoader.active = enabled
 
             Flickable {
-                anchors.fill: parent
+                //anchors.fill: parent
+                //anchors.bottom: parent.bottom+dp(bottomHeight)
+                height:dp(parent.height - bottomHeight)
+                width:parent.width
+                anchors.top: parent.top
 
                 contentHeight: Math.max(content.implicitHeight, height)
 
@@ -162,6 +167,8 @@ ApplicationWindow {
         Loader {
             id: smallLoader
             anchors.fill: parent
+
+
             sourceComponent: tabDelegate
 
             property var section: []
@@ -233,6 +240,9 @@ ApplicationWindow {
         id: tabDelegate
 
         Item {
+            height:dp(parent.height - bottomHeight)
+            width:parent.width
+            anchors.top: parent.top
 
             Sidebar {
                 id: sidebar
@@ -294,8 +304,10 @@ ApplicationWindow {
     }
 
     Rectangle {
+        id: rectControls
         color:'#fff'
-        height:dp(80)
+        z: 1
+        height:dp(bottomHeight)
         width:parent.width
         anchors.bottom: parent.bottom
         border.width:  dp(1)
@@ -303,7 +315,7 @@ ApplicationWindow {
 
         Rectangle {
             color:'#fff'
-            height:50
+            height:dp(bottomHeight -30) //50
         }
 
         Label {
@@ -311,7 +323,7 @@ ApplicationWindow {
             text: "没有正在播放的歌曲"
             //anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            height:dp(40)
+            height:dp(bottomHeight - 40) //40
             anchors.left: seeker.left
             width:dp(100)
             color: Theme.light.textColor
@@ -337,16 +349,16 @@ ApplicationWindow {
         }
     }
     Rectangle {
-
+        z:1
         anchors.bottomMargin: dp(0)
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
-        height:dp(40)
+        height:dp(bottomHeight - 40) //40
         width:dp(210)
 
         IconButton {
             iconName: 'av/skip_previous'
-            height:dp(35)
+            height:dp(bottomHeight - 45) //35
             width:dp(70)
             id: prevButton
             anchors.left: parent.left
@@ -358,7 +370,7 @@ ApplicationWindow {
 
         IconButton {
             iconName: 'av/play_arrow'
-            height:dp(35)
+            height:dp(bottomHeight - 45) //35
             width:dp(70)
             id: playButton1
             anchors.left: prevButton.right
@@ -371,7 +383,7 @@ ApplicationWindow {
 
         IconButton {
             iconName: 'av/skip_next'
-            height:dp(35)
+            height:dp(bottomHeight - 45) //35
             width:dp(70)
             id: nextButton
             anchors.left: playButton1.right

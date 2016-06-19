@@ -7,7 +7,8 @@
 ## LER0ever Project Israfil  
 Provide Unified Music Service for users in China.  
 
-由于版权问题，QQ音乐、网易云等音乐平台有部分歌曲无法播放。**Project Israfil通过实现各大音乐平台的API来提供统一的音乐服务，消除因版权导致的不方便.**
+**尽可能解决因为独家版权导致听/下一首歌需要下5\6个app以及多个音乐平台间歌曲歌单同步困难等问题。
+Project Israfil通过实现各大音乐平台的API来提供统一的音乐服务，消除因版权导致的不方便.**
 
 ## IN EARLY DEVELOPMENT  
 ### 早期开发尚不可使用！
@@ -23,7 +24,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 ### **[开发日志及当前运行截图（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**
 **由于项目在早期开发，您可以点右上[Watch](https://github.com/LER0ever/Israfil/subscription)接收项目开发动态提醒**
 ### [当前代码量统计](https://github.com/LER0ever/Israfil/blob/develop/doc/cloc.md)  
-已完成:  
+#### 已完成:  
 
 | 项目        | 协议       | 已完成                                              | 测试         | 完成时间   |
 | :---:       | :---:      | :---:                                               | :---:        | :---:      |
@@ -31,7 +32,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 | IsrafilApp  | UI         | Material Design界面初步                             | IsrafilApp   | 2016-06-13 |
 | IsrafilCore | 网易云音乐 | 获取图片和歌词地址                                  | test-netease | 2016-06-10 |
 | IsrafilCore | 网易云音乐 | 获取Mp3地址函数生效，并合并入search                 | test-search  | 2016-06-09 |
-| IsrafilCore | 网易& QQ   | 增加获取mp3，图片歌词的函数, 网易的加密暂时用Py实现 | -            | 2016-06-09 |
+| IsrafilCore | 网易& QQ   | 增加获取mp3，图片歌词的函数, 网易加密暂时用Py实现 | -            | 2016-06-09 |
 | IsrafilCore | 网易云音乐 | 完成网易搜索，整合进Universal Search，结果尚未排序  | test-search  | 2016-06-08 |
 | IsrafilCore | 网易云音乐 | 原API通过EncryptID及dfsID计算MP3下载地址            | test-netease | 2016-06-07 |
 | IsrafilCore | HTTPClient | 自定义header进行HTTP POST, 初步的网易搜索获得json   | test-network | 2016-06-06 |
@@ -42,7 +43,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 | IsrafilCore | QQ音乐     | 获得歌曲歌词、专辑图片及下载链接(包括无损)          | test-qqmusic | 2016-06-02 |
 | IsrafilCore | HTTPClient | 自定义header发送GET请求                             | test-network | 2016-05-28 |
 | HTTPAPI     | QQ&网易    | 搜索歌曲获得详细信息以及获得下载链接                | -            | 2016-04-15 |
-进行中(按优先级排列，**目前正在学车更新可能稍慢**):  
+#### 进行中(按优先级排列，**目前正在学车更新可能稍慢**):  
 
 | 项目        | 协议      | 功能                                                        | 完成情况 | 开始时间   |
 | :---:       | :---:     | :---:                                                       | :---:    | :---:      |
@@ -61,7 +62,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 
 ## Israfil编译
 ### 准备环境
-由于用到了QtQuick.Controls 2.0 Qt最小要求版本为5.7
+由于用到了QtQuick.Controls 2.0 Qt最小要求版本为5.7  
 Windows: Qt官网(qt.io)下载Qt For Windows并安装  
 Linux: sudo $包管理安装命令 qt5-default (如```sudo apt-get install qt5-default```, ```sudo pacman -S qt5```)  
 OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载安装包安装  
@@ -69,7 +70,7 @@ OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载
 ```
 git clone https://github.com/LER0ever/Israfil
 cd Israfil && mkdir build  
-git submodule update --init --recursive #obtain qml-material
+git submodule update --init --recursive #obtain qml-material, to be deleted ...
 cd build && qmake ..
 make
 ```

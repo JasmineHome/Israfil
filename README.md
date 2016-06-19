@@ -42,14 +42,14 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 | IsrafilCore | QQ音乐     | 获得歌曲歌词、专辑图片及下载链接(包括无损)          | test-qqmusic | 2016-06-02 |
 | IsrafilCore | HTTPClient | 自定义header发送GET请求                             | test-network | 2016-05-28 |
 | HTTPAPI     | QQ&网易    | 搜索歌曲获得详细信息以及获得下载链接                | -            | 2016-04-15 |
-进行中(按优先级排列):  
+进行中(按优先级排列，**目前正在学车更新可能稍慢**):  
 
-| 项目        | 协议       | 功能                                                                                        | 完成情况 | 开始时间   |
-| :---:       | :---:      | :---:                                                                                       | :---:    | :---:      |
-| IsrafilApp  | UI         | Qml-Material 界面设计，可能需要手动维护一份[Fork](https://github.com/LER0ever/qml-material) | 50%      | 2016-06-05 |
-| IsrafilApp  | Qml<->C++  | C++ 和 QML之间的caodan通讯 :(                                                               | 30%      | 2016-06-04 |
-| IsrafilCore | 虾米音乐   | 协议研究                                                                                    | 60%      | 2016-05-28 |
-| IsrafilAPP  | UI         | qml-material 初步界面demo 及 qml文件的资源打包                                              | 60%      | 2016-05-13 |
+| 项目        | 协议      | 功能                                                        | 完成情况 | 开始时间   |
+| :---:       | :---:     | :---:                                                       | :---:    | :---:      |
+| IsrafilApp  | UI        | **放弃qml-material，改用Qt5.7 QuickControls 2.0重写UI界面** | 0%       | 2016-06-19 |``
+| IsrafilApp  | Qml<->C++ | C++ 和 QML之间的caodan通讯 :(                               | 50%      | 2016-06-04 |
+| IsrafilCore | 虾米音乐  | 协议研究                                                    | 60%      | 2016-05-28 |
+| IsrafilAPP  | UI        | qml-material 初步界面demo 及 qml文件的资源打包              | 60%      | 2016-05-13 |
 
 ## Israfil下载
 ### [LER0ever/Israfil-builds](https://github.com/LER0ever/Israfil-builds)  
@@ -61,6 +61,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 
 ## Israfil编译
 ### 准备环境
+由于用到了QtQuick.Controls 2.0 Qt最小要求版本为5.7
 Windows: Qt官网(qt.io)下载Qt For Windows并安装  
 Linux: sudo $包管理安装命令 qt5-default (如```sudo apt-get install qt5-default```, ```sudo pacman -S qt5```)  
 OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载安装包安装  

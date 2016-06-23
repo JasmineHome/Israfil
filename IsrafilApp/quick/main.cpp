@@ -5,8 +5,6 @@
 
 #include <QDebug>
 
-#include "material/src/plugin.h"
-
 // #include "backendmodel.h"
 // #include "pluginloader.h"
 // #include "pluginmgr.h"
@@ -23,7 +21,7 @@ int main(int argc, char *argv[])
 
   qmlRegisterType<IsrafilCoreQt>("IsrafilCore", 1, 0, "IsrafilCoreQt");
 
-  // / QML Import Path {
+  /*
   engine.addImportPath("qrc:///");
   engine.addImportPath("qrc:/Material");
   engine.addImportPath("qrc:/QtQuick");
@@ -31,6 +29,7 @@ int main(int argc, char *argv[])
 
   MaterialPlugin qmlMaterial;
   qmlMaterial.registerTypes("Material");
+  */
 
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

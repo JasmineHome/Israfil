@@ -8,8 +8,7 @@ DESTDIR = $$BUILD_TREE/bin
 SOURCES += main.cpp \
     israfilcoreqt.cpp
 RESOURCES += \
-    qml/qml.qrc \
-    qml/icons/icons.qrc
+    qml/qml.qrc
 
 INCLUDEPATH += \
     $$SOURCE_TREE/IsrafilCore/IsrafilBase/include \
@@ -29,10 +28,7 @@ LIBS += -L$$BUILD_TREE/bin -lcurl -lcurlcpp -lIsrafilNetwork -licQQMusic -lIsraf
 
 #IsrafilAddLibrary(IsrafilCore)
 #include(../shared/shared.pri)
-#OPTIONS += roboto
-#DEFINES += QPM_INIT
 include(deployment.pri)
-include(material/material.pri)
 #osx {
     # TODO
 #    plugins.files += $$BUILD_TREE/plugins/libexampleplugin.$$QMAKE_EXTENSION_SHLIB

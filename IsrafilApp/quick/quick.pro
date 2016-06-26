@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = IsrafilApp
 
-QT += qml quick
+QT += qml quick quickcontrols2
 CONFIG += c++11 warn_off
 DESTDIR = $$BUILD_TREE/bin
 

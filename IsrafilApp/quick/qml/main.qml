@@ -1,399 +1,195 @@
-import QtQuick 2.4
-import Material 0.2
-import Material.ListItems 0.1 as ListItem
+import QtQuick 2.6
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Universal 2.0
+import Qt.labs.settings 1.0
 
 ApplicationWindow {
-    id: israpp
-
-    title: "Project Israfil"
-
-    // Necessary when loading the window from C++
+    id: mainwindow
+    width: 720
+    height: 480
     visible: true
+    title: "Israfil"
 
-    theme {
-        primaryColor: "blue"
-        accentColor: "red"
-        tabHighlightColor: "white"
+    Settings {
+        id: settings
+        property string style: "Material"
     }
 
-    property var styles: [
-        "Custom Icons", "Color Palette", "Typography"
-    ]
+    header: ToolBar {
+        Material.foreground: "white"
+        Material.primary: "blue"
 
-    property var basicComponents: [
-        "Button", "CheckBox", "Progress Bar", "Radio Button",
-        "Slider", "Switch", "TextField"
-    ]
-
-    property var compoundComponents: [
-        "Bottom Sheet", "Dialog", "Forms", "List Items", "Page Stack", "Time Picker", "Date Picker"
-    ]
-
-    property var tabSearch: [
-        "searchUniversal", "searchNetease", "searchQQMusic", "searchTTPod", "searchKugou"
-    ]
-
-    property var tabSongList: [
-        "To Be Loaded"
-    ]
-
-
-    property var sections: [ tabSearch, tabSongList, basicComponents, styles, compoundComponents ] //section name english
-
-    property var sectionTitles: [ "搜索", "歌单","Basic Components", "Style", "Compound Components" ]
-
-    property string selectedComponent: sections[0][0]
-    property string selectedSection: sectionTitles[0]
-    property int bottomHeight: 65
-    function displayName(comp){
-        var namemap = {
-            searchUniversal:'全网',
-            searchNetease: '网易云音乐',
-            searchQQMusic: 'QQ音乐',
-            searchTTPod: '天天动听',
-            searchKugou: '酷狗音乐'
-        }
-        if (namemap[comp] === undefined) return comp;
-        return namemap[comp];
-    }
-    initialPage: TabbedPage {
-        id: page
-
-
-        title: "Israfil Demo"
-
-        actionBar.maxActionCount: navDrawer.enabled ? 3 : 4
-
-        actions: [
-            Action {
-                iconName: "alert/warning"
-                name: "Dummy error"
-                onTriggered: israpp.showError("Something went wrong", "Do you want to retry?", "Close", true)
-            },
-
-            Action {
-                iconName: "image/color_lens"
-                name: "Colors"
-                onTriggered: colorPicker.show()
-            },
-
-            Action {
-                iconName: "action/settings"
-                name: "Settings"
-                hoverAnimation: true
-            },
-
-            Action {
-                iconName: "alert/warning"
-                name: "THIS SHOULD BE HIDDEN!"
-                visible: false
-            },
-
-            Action {
-                iconName: "action/language"
-                name: "Language"
-                enabled: false
-            },
-
-            Action {
-                iconName: "action/account_circle"
-                name: "Accounts"
-            }
-        ]
-
-        backAction: navDrawer.action
-
-        NavigationDrawer {
-            id: navDrawer
-
-            enabled: page.width < dp(500)
-
-            onEnabledChanged: smallLoader.active = enabled
-
-            Flickable {
-                //anchors.fill: parent
-                //anchors.bottom: parent.bottom+dp(bottomHeight)
-                height:dp(parent.height - bottomHeight)
-                width:parent.width
-                anchors.top: parent.top
-
-                contentHeight: Math.max(content.implicitHeight, height)
-
-                Column {
-                    id: content
-                    anchors.fill: parent
-
-                    Repeater {
-                        model: sections
-
-                        delegate: Column {
-                            width: parent.width
-
-                            ListItem.Subheader {
-                                text: sectionTitles[index]
-                            }
-
-                            Repeater {
-                                model: modelData
-                                delegate: ListItem.Standard {
-                                    text: displayName(modelData) //CHANGED modelData
-                                    selected: modelData == israpp.selectedComponent
-                                    onClicked: {
-                                        israpp.selectedComponent = modelData
-                                        navDrawer.close()
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        Repeater {
-            model: !navDrawer.enabled ? sections : 0
-
-            delegate: Tab {
-                title: sectionTitles[index]
-
-                property string selectedComponent: modelData[0]
-                property var section: modelData
-                property string selectedSection: sectionTitles[index]
-
-                sourceComponent: tabDelegate
-            }
-        }
-
-        Loader {
-            id: smallLoader
+        RowLayout {
+            spacing: 20
             anchors.fill: parent
 
+            ToolButton {
+                contentItem: Image {
+                    fillMode: Image.Pad
+                    horizontalAlignment: Image.AlignHCenter
+                    verticalAlignment: Image.AlignVCenter
+                    source: "qrc:/images/drawer.png"
+                }
+                onClicked: drawer.open()
+            }
 
-            sourceComponent: tabDelegate
+            Label {
+                id: titleLabel
+                text: "Project Israfil"
+                font.pixelSize: 20
+                elide: Label.ElideRight
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                Layout.fillWidth: true
+            }
 
-            property var section: []
-            visible: active
-            active: false
-        }
-    }
+            ToolButton {
+                contentItem: Image {
+                    fillMode: Image.Pad
+                    horizontalAlignment: Image.AlignHCenter
+                    verticalAlignment: Image.AlignVCenter
+                    source: "qrc:/images/menu.png"
+                }
+                onClicked: optionsMenu.open()
 
-    Dialog {
-        id: colorPicker
-        title: "Pick color"
+                Menu {
+                    id: optionsMenu
+                    x: parent.width - width
+                    transformOrigin: Menu.TopRight
 
-        positiveButtonText: "Done"
-
-        MenuField {
-            id: selection
-            model: ["Primary color", "Accent color", "Background color"]
-            width: dp(160)
-        }
-
-        Grid {
-            columns: 7
-            spacing: dp(8)
-
-            Repeater {
-                model: [
-                    "red", "pink", "purple", "deepPurple", "indigo",
-                    "blue", "lightBlue", "cyan", "teal", "green",
-                    "lightGreen", "lime", "yellow", "amber", "orange",
-                    "deepOrange", "grey", "blueGrey", "brown", "black",
-                    "white"
-                ]
-
-                Rectangle {
-                    width: dp(30)
-                    height: dp(30)
-                    radius: dp(2)
-                    color: Palette.colors[modelData]["500"]
-                    border.width: modelData === "white" ? dp(2) : 0
-                    border.color: Theme.alpha("#000", 0.26)
-
-                    Ink {
-                        anchors.fill: parent
-
-                        onPressed: {
-                            switch(selection.selectedIndex) {
-                            case 0:
-                                theme.primaryColor = parent.color
-                                break;
-                            case 1:
-                                theme.accentColor = parent.color
-                                break;
-                            case 2:
-                                theme.backgroundColor = parent.color
-                                break;
-                            }
-                        }
+                    MenuItem {
+                        text: "Settings"
+                        onTriggered: settingsPopup.open()
+                    }
+                    MenuItem {
+                        text: "About"
+                        onTriggered: aboutDialog.open()
                     }
                 }
             }
         }
-
-        onRejected: {
-            // TODO set default colors again but we currently don't know what that is
-        }
     }
 
-    Component {
-        id: tabDelegate
+    Popup {
+        id: settingsPopup
+        x: (mainwindow.width - width) / 2
+        y: mainwindow.height / 6
+        width: Math.min(mainwindow.width, mainwindow.height) / 3 * 2
+        height: settingsColumn.implicitHeight + topPadding + bottomPadding
+        modal: true
+        focus: true
 
-        Item {
-            height:dp(parent.height - bottomHeight)
-            width:parent.width
-            anchors.top: parent.top
+        contentItem: ColumnLayout {
+            id: settingsColumn
+            spacing: 20
 
-            Sidebar {
-                id: sidebar
+            Label {
+                text: "Settings"
+                font.bold: true
+            }
 
-                expanded: !navDrawer.enabled
+            RowLayout {
+                spacing: 10
 
-                Column {
-                    width: parent.width
+                Label {
+                    text: "Style:"
+                }
 
-                    Repeater {
-                        model: section
-                        delegate: ListItem.Standard {
-                            text: displayName(modelData)//CHANGED modelData
-                            selected: modelData == selectedComponent
-                            onClicked: {
-                                selectedComponent = modelData
-                                //selectedSection = section.name
-                                console.log(selectedComponent, selectedSection, section)
-                            }
-
-                        }
+                ComboBox {
+                    id: styleBox
+                    property int styleIndex: -1
+                    model: ["Default", "Material", "Universal"]
+                    Component.onCompleted: {
+                        styleIndex = find(settings.style, Qt.MatchFixedString)
+                        if (styleIndex !== -1)
+                            currentIndex = styleIndex
                     }
+                    Layout.fillWidth: true
                 }
             }
-            Flickable {
-                id: flickable
-                anchors {
-                    left: sidebar.right
-                    right: parent.right
-                    top: parent.top
-                    bottom: parent.bottom
-                }
-                clip: true
-                contentHeight: Math.max(example.implicitHeight + 40, height)
-                Loader {
-                    id: example
-                    anchors.fill: parent
-                    asynchronous: true
-                    visible: status == Loader.Ready
-                    // selectedComponent will always be valid, as it defaults to the first component
-                    source: {
-                        if (navDrawer.enabled) {
-                            return Qt.resolvedUrl("%UI.qml").arg(israpp.selectedComponent.replace(" ", ""))
-                        } else {
-                            return Qt.resolvedUrl("%UI.qml").arg(selectedComponent.replace(" ", ""))
-                        }
+
+            Label {
+                text: "Restart required"
+                color: "#e41e25"
+                opacity: styleBox.currentIndex !== styleBox.styleIndex ? 1.0 : 0.0
+                horizontalAlignment: Label.AlignHCenter
+                verticalAlignment: Label.AlignVCenter
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+            RowLayout {
+                spacing: 10
+
+                Button {
+                    id: okButton
+                    text: "Ok"
+                    onClicked: {
+                        settings.style = styleBox.displayText
+                        settingsPopup.close()
                     }
+
+                    Material.foreground: Material.primary
+                    Material.background: "transparent"
+                    Material.elevation: 0
+
+                    Layout.preferredWidth: 0
+                    Layout.fillWidth: true
                 }
 
-                ProgressCircle {
-                    anchors.centerIn: parent
-                    visible: example.status == Loader.Loading
+                Button {
+                    id: cancelButton
+                    text: "Cancel"
+                    onClicked: {
+                        styleBox.currentIndex = styleBox.styleIndex
+                        settingsPopup.close()
+                    }
+
+                    Material.background: "transparent"
+                    Material.elevation: 0
+
+                    Layout.preferredWidth: 0
+                    Layout.fillWidth: true
                 }
             }
-            Scrollbar {
-                flickableItem: flickable
-            }
         }
     }
 
-    Rectangle {
-        id: rectControls
-        color:'#fff'
-        z: 1
-        height:dp(bottomHeight)
-        width:parent.width
-        anchors.bottom: parent.bottom
-        border.width:  dp(1)
-        border.color: Theme.alpha("#aaa", 0.26)
+    Popup {
+        id: aboutDialog
+        modal: true
+        focus: true
+        x: (mainwindow.width - width) / 2
+        y: mainwindow.height / 6
+        width: Math.min(mainwindow.width, mainwindow.height) / 3 * 2
+        contentHeight: aboutColumn.height
 
-        Rectangle {
-            color:'#fff'
-            height:dp(bottomHeight -30) //50
-        }
+        Column {
+            id: aboutColumn
+            spacing: 20
 
-        Label {
-            id: songPlaying
-            text: "没有正在播放的歌曲"
-            //anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            height:dp(bottomHeight - 40) //40
-            anchors.left: seeker.left
-            width:dp(100)
-            color: Theme.light.textColor
-        }
+            Label {
+                text: "About"
+                font.bold: true
+            }
 
-        Slider {
-            id: seeker
-            width: parent.width - dp(50)
+            Label {
+                width: aboutDialog.availableWidth
+                text: "From QtQuick Demo: The Qt Quick Controls 2 module delivers the next generation user interface controls based on Qt Quick."
+                wrapMode: Label.Wrap
+                font.pixelSize: 12
+            }
 
-            anchors.horizontalCenter: parent.horizontalCenter
-            height:50
-            value: 0
-            darkBackground: false
-            updateValueWhileDragging: true
-            color:theme.primaryColor
-            anchors.rightMargin: dp(50)
-            anchors.leftMargin:dp(50)
-            anchors.bottomMargin:dp(190)
-
-            onValueChanged: {
-                //TODO
+            Label {
+                width: aboutDialog.availableWidth
+                text: "In comparison to the desktop-oriented Qt Quick Controls 1, Qt Quick Controls 2 "
+                    + "are an order of magnitude simpler, lighter and faster, and are primarily targeted "
+                    + "towards embedded and mobile platforms."
+                wrapMode: Label.Wrap
+                font.pixelSize: 12
             }
         }
     }
-    Rectangle {
-        z:1
-        anchors.bottomMargin: dp(0)
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        height:dp(bottomHeight - 40) //40
-        width:dp(210)
-
-        IconButton {
-            iconName: 'av/skip_previous'
-            height:dp(bottomHeight - 45) //35
-            width:dp(70)
-            id: prevButton
-            anchors.left: parent.left
-            size: dp(30)
-            onClicked: {
-
-            }
-        }
-
-        IconButton {
-            iconName: 'av/play_arrow'
-            height:dp(bottomHeight - 45) //35
-            width:dp(70)
-            id: playButton1
-            anchors.left: prevButton.right
-            size: dp(30)
-            onClicked: {
-
-            }
-
-        }
-
-        IconButton {
-            iconName: 'av/skip_next'
-            height:dp(bottomHeight - 45) //35
-            width:dp(70)
-            id: nextButton
-            anchors.left: playButton1.right
-            size: dp(30)
-
-            onClicked: {
-
-            }
-        }
-
-    }
-
 }

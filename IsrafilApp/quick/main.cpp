@@ -1,7 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <qqml.h>
+#include <QSettings>
+#include <QQuickStyle>
 
 #include <QDebug>
 
@@ -11,25 +12,35 @@
 // #include "israfilcore.h"
 #include "israfilcoreqt.h"
 
+
 int main(int argc, char *argv[])
 {
+  QGuiApplication::setApplicationName("Israfil");
+  QGuiApplication::setOrganizationName("Void.LER0ever");
+  QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QGuiApplication app(argc, argv);
 
   // qmlRegisterType<BackendModel>("israfil", 1, 0, "BackendModel");
+  QSettings settings;
+  QString style = QQuickStyle::name();
+  if (!style.isEmpty())
+      settings.setValue("style", style);
+  else
+      QQuickStyle::setStyle(settings.value("style").toString());
 
-  QQmlApplicationEngine engine(&app);
+  QQmlApplicationEngine engine;
 
   qmlRegisterType<IsrafilCoreQt>("IsrafilCore", 1, 0, "IsrafilCoreQt");
 
   /*
-  engine.addImportPath("qrc:///");
-  engine.addImportPath("qrc:/Material");
-  engine.addImportPath("qrc:/QtQuick");
-  engine.addImportPath("qrc:/QtQuick/Controls/Styles/Material");
+     engine.addImportPath("qrc:///");
+     engine.addImportPath("qrc:/Material");
+     engine.addImportPath("qrc:/QtQuick");
+     engine.addImportPath("qrc:/QtQuick/Controls/Styles/Material");
 
-  MaterialPlugin qmlMaterial;
-  qmlMaterial.registerTypes("Material");
-  */
+     MaterialPlugin qmlMaterial;
+     qmlMaterial.registerTypes("Material");
+   */
 
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

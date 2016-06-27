@@ -5,9 +5,9 @@ os: unstable
 #   make: nmake release
 install:
 # - set QTDIR=C:\Qt\5.5\mingw492_32
- - set QTDIR=C:\Qt\5.7\mingw492_32
+ - set QTDIR=C:\Qt\5.7\mingw53_32
 # - set PATH=%PATH%;%QTDIR%\bin
- - set PATH=%PATH%;C:\Qt\5.7\mingw492_32\bin;C:\Qt\Tools\mingw492_32\bin
+ - set PATH=%PATH%;C:\Qt\5.7\mingw53_32\bin;C:\Qt\Tools\mingw53_32\bin
 build_script:
  - git submodule update --init --recursive
 # - '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86'
@@ -20,8 +20,8 @@ build_script:
 # - cd build
 # - cmake .. -G"MinGW Makefiles"
  - mingw32-make mingw32
- - xcopy include C:\Qt\5.7\mingw492_32\include /e
- - xcopy lib\libcurl.dll C:\Qt\5.7\mingw492_32\lib /e
+ - xcopy include C:\Qt\5.7\mingw53_32\include /e
+ - xcopy lib\libcurl.dll C:\Qt\5.7\mingw53_32\lib /e
  - xcopy lib\libcurl.dll ..\ /e
  - cd ../
  - md build-mingw
@@ -43,7 +43,7 @@ build_script:
  - ren bin Israfil
  - cd Israfil
  - xcopy ..\..\libcurl.dll .
- - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.7\mingw492_32\qml
+ - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.7\mingw53_32\qml
 # - windeployqt test-json.exe --qmldir C:\Qt\5.5\mingw492_32\qml
 # - windeployqt test-qqmusic.exe --qmldir C:\Qt\5.5\mingw492_32\qml
 # - windeployqt test-network.exe --qmldir C:\Qt\5.5\mingw492_32\qml

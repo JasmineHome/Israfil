@@ -72,6 +72,75 @@ ApplicationWindow {
         }
     }
 
+    Drawer {
+        id: drawer
+        width: Math.min(mainwindow.width, mainwindow.height) / 3 * 2
+        height: mainwindow.height
+
+        ListView {
+            id: listView
+            currentIndex: -1
+            anchors.fill: parent
+
+            delegate: ItemDelegate {
+                width: parent.width
+                text: model.title
+                highlighted: ListView.isCurrentItem
+                onClicked: {
+                    if (listView.currentIndex != index) {
+                        listView.currentIndex = index
+                        titleLabel.text = model.title
+                        stackView.replace(model.source)
+                    }
+                    drawer.close()
+                }
+            }
+
+            model: ListModel {
+                ListElement { title: "TabBar"; source: "qrc:/pages/TabBarPage.qml" }
+            }
+
+            ScrollIndicator.vertical: ScrollIndicator { }
+        }
+    }
+    StackView {
+        id: stackView
+        anchors.fill: parent
+
+        initialItem: Pane {
+            id: pane
+
+            Image {
+                id: logo
+                width: pane.availableWidth / 2
+                height: pane.availableHeight / 2
+                anchors.centerIn: parent
+                anchors.verticalCenterOffset: -50
+                fillMode: Image.PreserveAspectFit
+                source: "qrc:/images/qt-logo.png"
+            }
+
+            Label {
+                text: "Hi, you are using the demo version of Project Israfil and thus there maybe some bugs"
+                anchors.margins: 20
+                anchors.top: logo.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: arrow.top
+                horizontalAlignment: Label.AlignHCenter
+                verticalAlignment: Label.AlignVCenter
+                wrapMode: Label.Wrap
+            }
+
+            Image {
+                id: arrow
+                source: "qrc:/images/arrow.png"
+                anchors.left: parent.left
+                anchors.bottom: parent.bottom
+            }
+        }
+    }
+
     Popup {
         id: settingsPopup
         x: (mainwindow.width - width) / 2

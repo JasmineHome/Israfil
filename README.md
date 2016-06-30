@@ -24,33 +24,37 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 ### **[开发日志及当前运行截图（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**
 **由于项目在早期开发，您可以点右上[Watch](https://github.com/LER0ever/Israfil/subscription)接收项目开发动态提醒**
 ### [当前代码量统计](https://github.com/LER0ever/Israfil/blob/develop/doc/cloc.md)  
-#### 已完成:  
-
-| 项目        | 协议       | 已完成                                              | 测试         | 完成时间   |
-| :---:       | :---:      | :---:                                               | :---:        | :---:      |
-| IsrafilApp  | UI         | 界面中英文映射&UI初步框架                           | IsrafilApp   | 2016-06-16 |
-| IsrafilApp  | UI         | Material Design界面初步                             | IsrafilApp   | 2016-06-13 |
-| IsrafilCore | 网易云音乐 | 获取图片和歌词地址                                  | test-netease | 2016-06-10 |
-| IsrafilCore | 网易云音乐 | 获取Mp3地址函数生效，并合并入search                 | test-search  | 2016-06-09 |
-| IsrafilCore | 网易& QQ   | 增加获取mp3，图片歌词的函数, 网易加密暂时用Py实现 | -            | 2016-06-09 |
-| IsrafilCore | 网易云音乐 | 完成网易搜索，整合进Universal Search，结果尚未排序  | test-search  | 2016-06-08 |
-| IsrafilCore | 网易云音乐 | 原API通过EncryptID及dfsID计算MP3下载地址            | test-netease | 2016-06-07 |
-| IsrafilCore | HTTPClient | 自定义header进行HTTP POST, 初步的网易搜索获得json   | test-network | 2016-06-06 |
-| IsrafilCore | QQ音乐     | 整合音乐结果到Universal Search并加入Json            | test-qqmusic | 2016-06-04 |
-| IsrafilCore | Universal  | SongList搜索结果重编码为Json供qml调用               | test-qqmusic | 2016-06-04 |
-| Israfil     | 持续集成   | 完成全自动化编译+上传二进制文件                     | -            | 2016-06-03 |
-| IsrafilCore | Universal  | 封装QQ搜索至IsrafilCore                             | test-core    | 2016-06-02 |
-| IsrafilCore | QQ音乐     | 获得歌曲歌词、专辑图片及下载链接(包括无损)          | test-qqmusic | 2016-06-02 |
-| IsrafilCore | HTTPClient | 自定义header发送GET请求                             | test-network | 2016-05-28 |
-| HTTPAPI     | QQ&网易    | 搜索歌曲获得详细信息以及获得下载链接                | -            | 2016-04-15 |
-#### 进行中(按优先级排列，**目前正在学车更新可能稍慢**):  
-
-| 项目        | 协议      | 功能                                                        | 完成情况 | 开始时间   |
-| :---:       | :---:     | :---:                                                       | :---:    | :---:      |
-| IsrafilApp  | UI        | **放弃qml-material，改用Qt5.7 QuickControls 2.0重写UI界面** | 0%       | 2016-06-19 |``
-| IsrafilApp  | Qml<->C++ | C++ 和 QML之间的caodan通讯 :(                               | 50%      | 2016-06-04 |
-| IsrafilCore | 虾米音乐  | 协议研究                                                    | 60%      | 2016-05-28 |
-| IsrafilAPP  | UI        | qml-material 初步界面demo 及 qml文件的资源打包              | 60%      | 2016-05-13 |
+#### 任务列表:  
+ - [ ] IsrafilApp
+    - [ ] UI
+       - [ ] **放弃qml-material，改用Qt5.7 QuickControls 2.0重写UI界面**
+       - [x] Material Design界面初步
+       - [ ] C++ 和 QML之间的caodan通讯 :(
+ - [ ] IsrafilCore
+    - [ ] 网易云音乐
+       - [x] 获取图片和歌词地址
+       - [x] 获取Mp3地址函数生效，并合并入search
+       - [x] 完成网易搜索，整合进Universal Search，结果尚未排序
+       - [ ] Universal 歌单整合
+       - [ ] 用户登陆后相关操作
+       - [ ] 跳进新API大坑
+    - [ ] QQ音乐
+       - [x] 获得歌曲歌词、专辑图片及下载链接(包括无损)
+       - [ ] 歌单相关操作，包括合并为Universal歌单
+       - [x] 整合音乐结果到Universal Search并加入Json
+    - [ ] Universal
+       - [x] 封装QQ搜索至IsrafilCore
+       - [x] SongList搜索结果重编码为Json供qml调用
+    - [ ] HTTPClient
+       - [x] 自定义header发送GET请求
+       - [x] 自定义header进行HTTP POST, 初步的网易搜索获得json
+ - [ ] HTTPAPI
+    - [x] 网易&QQ：搜索歌曲获得详细信息以及获得下载链接
+    - [ ] 其他协议
+ - [ ] 其他
+    - [x] 持续集成
+       - [x] 完成全自动化编译+上传二进制文件
+       - [ ] 添加自动配置cython及网易新API
 
 ## Israfil下载
 ### [LER0ever/Israfil-builds](https://github.com/LER0ever/Israfil-builds)  
@@ -84,7 +88,7 @@ See [contribute.md](https://github.com/LER0ever/Israfil/blob/develop/doc/contrib
 | :---:    | :---:               | :---:                                                                                       |
 | Linux    | 5.6 Clang & GCC     | ![traviscistatus](https://api.travis-ci.org/LER0ever/Israfil.svg)                           |
 | OS X     | 5.6 Clang & GCC     | ![traviscistatus](https://api.travis-ci.org/LER0ever/Israfil.svg)                           |
-| Windows  | 5.5 MinGW gcc       | ![appvayorstatus](https://ci.appveyor.com/api/projects/status/14ny9o50m4xb0c6g) |
+| Windows  | 5.7 MinGW gcc       | ![appvayorstatus](https://ci.appveyor.com/api/projects/status/14ny9o50m4xb0c6g) |
 | Android  | 5.5 gcc androideabi | ![shield](https://img.shields.io/badge/build-unknown-lightgrey.svg?style=flat-square)       |
 
 ## Copyright

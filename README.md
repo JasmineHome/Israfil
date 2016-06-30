@@ -54,6 +54,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
  - [ ] 其他
     - [x] 持续集成
        - [x] 完成全自动化编译+上传二进制文件
+       - [ ] **紧急: Travis改用Qt5.7编译**
        - [ ] 添加自动配置cython及网易新API
 
 ## Israfil下载

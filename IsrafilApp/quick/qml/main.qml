@@ -137,6 +137,7 @@ ApplicationWindow {
                 source: "qrc:/images/arrow.png"
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
+
             }
         }
     }

@@ -1,3 +1,4 @@
 TEMPLATE = subdirs
 SUBDIRS += icQQMusic \
-    icNetease
+    icNetease \
+    icTTPod

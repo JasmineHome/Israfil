@@ -42,6 +42,8 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
        - [x] 获得歌曲歌词、专辑图片及下载链接(包括无损)
        - [ ] 歌单相关操作，包括合并为Universal歌单
        - [x] 整合音乐结果到Universal Search并加入Json
+    - [ ] 天天动听
+       - [ ] 搜索歌曲获得歌曲详情json
     - [ ] Universal
        - [x] 封装QQ搜索至IsrafilCore
        - [x] SongList搜索结果重编码为Json供qml调用
@@ -60,6 +62,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 ## Israfil下载
 ### [LER0ever/Israfil-builds](https://github.com/LER0ever/Israfil-builds)  
 - **直接点上面的链接↸↸↸，(前提是如果你完全不知道这整个页面在说什么的话，)上面的链接会带你去下载地址**
+- 目前CI编译脚本待修复，主要是Qt 5.7的问题，自动编译暂停。
 - 注意，这个repo里的文件是本项目实时编译结果，**尚在早期开发，下下来也没什么用**  
 - Releases里的格式为“操作系统 - 编译工具链 - 版本号 - 时间戳”，如macx-clang-0.1.0.0003-115355  
 - 每次commit过后利用CI打Tag然后将Artifacts上传至Releases，Releases数量可能会较多，选择最近的二进制下载即可  
@@ -67,7 +70,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 
 ## Israfil编译
 ### 准备环境
-由于用到了QtQuick.Controls 2.0 Qt最小要求版本为5.7  
+**由于用到了QtQuick.Controls 2.0 Qt最小要求版本为5.7**  
 Windows: Qt官网(qt.io)下载Qt For Windows并安装  
 Linux: sudo $包管理安装命令 qt5-default (如```sudo apt-get install qt5-default```, ```sudo pacman -S qt5```)  
 OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载安装包安装  
@@ -95,7 +98,6 @@ See [contribute.md](https://github.com/LER0ever/Israfil/blob/develop/doc/contrib
 ## Copyright
 | 3rd party            | License | Needed by   | in source            |
 | :---:                | :---:   | :---:       | :---:                |
-| papyros/qml-material | LGPL2   | IsrafilApp  | Embedded in source   |
 | Qt Project           | LGPL2   | IsrafilApp  | Universal Dependency |
 | JosephP91/curlcpp    | MIT     | IsrafilCore | Embedded in source   |
 | JieweiWei/md5        | Apache  | IsrafilCore | Embedded in source   |

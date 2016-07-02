@@ -19,7 +19,7 @@ INCLUDEPATH += \
     $$SOURCE_TREE/IsrafilCore/ext/rapidjson/include \
     $$SOURCE_TREE/IsrafilCore/ext/curlcpp/include
 
-LIBS += -L$$BUILD_TREE/bin -lcurl -lcurlcpp -lIsrafilNetwork -licQQMusic -lIsrafilCore -lIsrafilBase
+LIBS += -L$$BUILD_TREE/bin -lcurl -lcurlcpp -lIsrafilNetwork -lIsrafilCore -licQQMusic -lIsrafilBase
 
 #    qml/icons/icons.qrc
 

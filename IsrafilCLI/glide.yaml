@@ -1,3 +1,4 @@
 package: github.com/LER0ever/Israfil/IsrafilCLI
 import:
 - package: github.com/ddliu/go-httpclient
+- package: github.com/gizak/termui

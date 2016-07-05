@@ -6,6 +6,7 @@ import (
 	//	"os"
 
 	"github.com/LER0ever/Israfil/IsrafilCLI/base"
+	"github.com/LER0ever/Israfil/IsrafilCLI/ui"
 )
 
 //InitialVersionPrint Print startup info
@@ -21,4 +22,8 @@ func InitialVersionPrint() {
 
 func InitLogPrefix() {
 	log.SetPrefix("IsrafilCLI::Main:: ")
+}
+
+func InitCLI() {
+	ui.InitUI()
 }

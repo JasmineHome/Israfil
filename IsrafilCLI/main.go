@@ -6,7 +6,8 @@ package main
 func main() {
 	InitialVersionPrint()
 	InitLogPrefix()
-	testUniSearch()
+	InitCLI()
+	//testUniSearch()
 	//fmt.Println(testNeteaseSearch("soledad"))
 	//StartPluginSystem()
 	//StopSystem()

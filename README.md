@@ -53,6 +53,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
  - [ ] IsrafilCLI (Golang 独立项目)
     - [x] 网易&QQ：搜索歌曲获得详细信息以及获得下载链接
     - [ ] 基于termui的命令行界面
+    - [ ] termui的editbox实现
     - [ ] 其他协议
  - [ ] 其他
     - [x] 持续集成

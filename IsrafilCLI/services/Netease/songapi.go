@@ -1,4 +1,4 @@
-package main
+package netease
 
 import (
 	//	"crypto/aes"
@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
+	"net/http"
 	"strings"
 	"time"
 
@@ -16,7 +17,7 @@ import (
 	"github.com/ddliu/go-httpclient"
 )
 
-func initHTTPClient() {
+func InitHTTPClient() {
 	httpclient.Defaults(httpclient.Map{
 		httpclient.OPT_USERAGENT: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36",
 		"Accept":                 "*/*",
@@ -77,17 +78,24 @@ func getInfoByID(ID int64, Neslr *NeteaseSongListRet) error {
 }
 
 func searchByName(Name string, Nesr *NeteaseSearchRet) error {
-	resp, err := httpclient.Post("http://music.163.com/api/search/get/", map[string]string{
-		"s":      Name,
-		"limit":  "20",
-		"type":   "1",
-		"offset": "0",
-	})
+	resp, err := httpclient.
+		WithCookie(&http.Cookie{
+			Name:  "appver",
+			Value: "2.0.2",
+		}).
+		Post("http://music.163.com/api/search/get/web", map[string]string{
+			"s":      Name,
+			"limit":  "30",
+			"total":  "true",
+			"type":   "1",
+			"offset": "0",
+		})
 	if err != nil {
 		log.Fatalf("POST err: %s", err)
 		return err
 	}
 	content, _ := resp.ReadAll()
+	log.Printf("POST Return: %s", content)
 	err = json.Unmarshal(content, Nesr)
 	if err != nil {
 		log.Fatalf("Json Parse Error: %s", err)

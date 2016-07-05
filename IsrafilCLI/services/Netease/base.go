@@ -1,16 +1,17 @@
-package main
+package netease
 
 //NEBase Netease basic URL
 //NEApiBase Netease Api basic URL
 const (
-	magicKey   = "3go8&$8*3*3h0k(2)2"
-	NEBase     = "http://music.163.com"
-	NEApiBase  = NEBase + "/api"
-	NESongInfo = NEApiBase + "/song/detail?ids=[%d]"
-	NESongCDN  = "http://m%d.music.126.net/%s/%d.mp3"
-	NESongURL  = "http://music.163.com/#/song?id=%d"
-	NERetOK    = 200
-	DEBUG      = 1
+	magicKey          = "3go8&$8*3*3h0k(2)2"
+	NEBase            = "http://music.163.com"
+	NEApiBase         = NEBase + "/api"
+	NESongInfo        = NEApiBase + "/song/detail?ids=[%d]"
+	NESongCDN         = "http://m%d.music.126.net/%s/%d.mp3"
+	NESongURL         = "http://music.163.com/#/song?id=%d"
+	NESearchApiParams = "s=%s&limit=20&type=1&offset=0"
+	NERetOK           = 200
+	DEBUG             = 1
 )
 
 //NeteaseMusicInfo defines an mp3 file
@@ -52,16 +53,16 @@ type NeteaseAlbumSubRet struct {
 //NeteaseSongListRet Main return result for json, only Code 200 is OK
 type NeteaseSongListRet struct {
 	Songs []NeteaseSongSubRet `json:"songs"`
-	Code  int64               `json:"code"`
+	Code  uint                `json:"code"`
 }
 
 type NeteaseSearchSongResSubRet struct {
-	SongNum int64               `json:"songCount"`
+	SongNum uint                `json:"songCount"`
 	Songs   []NeteaseSongSubRet `json:"songs"`
 }
 
 //NeteaseSearchRet a structure to receive the search result json
 type NeteaseSearchRet struct {
 	Result NeteaseSearchSongResSubRet `json:"result"`
-	Code   int64                      `json:"code"`
+	Code   uint                       `json:"code"`
 }

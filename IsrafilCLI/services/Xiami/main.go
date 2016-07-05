@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/rpc/jsonrpc"
 
-	"github.com/LER0ever/Israfil/HttpAPI/base"
+	"github.com/LER0ever/Israfil/IsrafilCLI/base"
 	//"github.com/natefinch/pie"
 )
 

@@ -1,4 +1,4 @@
-package main
+package qqmusic
 
 //QMBase QQ Music Basic URL
 const (
@@ -11,8 +11,8 @@ const (
 	QMHighMp3URL    = QMStreamURL + "/%d.mp3"      //sid
 	QMFlacURL       = QMStreamURL + "/F000%d.flac" //mid
 	QMApeURL        = QMStreamURL + "/A000%d.ape"  //mid
-	QMSongURL       = "http://y.qq.com/#type=song&mid=%d&tpl=yqq_song_detail"
-	QMSongDetailURL = "http://s.plcloud.music.qq.com/fcgi-bin/fcg_list_songinfo.fcg?idlist=%d&callback=jsonCallback&url=1"
+	QMSongURL       = "http://y.qq.com/#type=song&mid=%s&tpl=yqq_song_detail"
+	QMSongDetailURL = "http://s.plcloud.music.qq.com/fcgi-bin/fcg_list_songinfo.fcg?idlist=%s&callback=jsonCallback&url=1"
 	QMAlbumPicURL   = "http://i.gtimg.cn/music/photo/mid_album_300/%d/%d/%d.jpg"
 	QMLyricsURL     = "http://music.qq.com/miniportal/static/lyric/<0>/<1>.xml"
 
@@ -33,7 +33,7 @@ type QMSearchDataSubRet struct {
 }
 
 type QMSearchSongSubRet struct {
-	Curnum    int64                `json:"curnum"`
+	Curnum    uint                 `json:"curnum"`
 	SongLists []QMSearchListSubRet `json:"list"`
 }
 
@@ -43,7 +43,7 @@ type QMSearchListSubRet struct {
 
 //QMSearchRet Main return structure of QQMusic song search
 type QMSearchRet struct {
-	Code int64              `json:"code"`
+	Code uint               `json:"code"`
 	Data QMSearchDataSubRet `json:"data"`
 	//TODO
 }

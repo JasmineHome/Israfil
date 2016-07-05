@@ -1,45 +1,16 @@
-package main
+package netease
 
 import (
 	"fmt"
 	"log"
-	"net/rpc/jsonrpc"
+	//  "net/rpc/jsonrpc"
 	//	"github.com/ddliu/go-httpclient"
 
-	"github.com/LER0ever/Israfil/HttpAPI/base"
+	"github.com/LER0ever/Israfil/IsrafilCLI/base"
 	//"github.com/natefinch/pie"
 )
 
-func main() {
-	log.SetPrefix("IsrafilCore::Plugin::Netease:: ")
-	initHTTPClient()
-
-	if DEBUG == 1 {
-		debugTest()
-	}
-
-	p := base.NewProvider()
-	if err := p.RegisterName("Netease", api{}); err != nil {
-		log.Fatalf("failed to register Plugin: %s", err)
-	}
-	p.ServeCodec(jsonrpc.NewServerCodec)
-
-}
-
-type api struct{}
-
-func (api) Ping(msg string, response *string) error {
-	if msg != "ping" {
-		*response = "Plugin Failed"
-		return nil
-	}
-	log.Printf("Successfully Connected to host IsrafilCore::Main")
-
-	*response = "IsrafilCore::Plugin::Netease Plugged"
-	return nil
-}
-
-func (api) Search(name string, retSR *base.SearchRet) error {
+func Search(name string, retSR *base.SearchRet) error {
 	var Nesr NeteaseSearchRet
 	searchByName(name, &Nesr)
 	log.Printf("Nesr.Result.SongNum: %d", Nesr.Result.SongNum)
@@ -48,14 +19,14 @@ func (api) Search(name string, retSR *base.SearchRet) error {
 		var tempS base.Song
 		retSR.Songs = append(retSR.Songs, tempS)
 		retSR.Songs[i].UID = fmt.Sprintf("%d%d", base.SrcNetease, song.ID)
-		retSR.Songs[i].Name = song.Name
-		retSR.Songs[i].ID = song.ID
-		retSR.Songs[i].Source = base.SrcNetease
-		retSR.Songs[i].URL = fmt.Sprintf(NESongURL, song.ID)
+		retSR.Songs[i].SName = song.Name
+		retSR.Songs[i].SID = fmt.Sprintf("%d", song.ID)
+		retSR.Songs[i].SSource = base.SrcNetease
+		retSR.Songs[i].SURL = fmt.Sprintf(NESongURL, song.ID)
 		//	retSR.Songs[i].MusicURL
 		var tempNeslr NeteaseSongListRet
 		getInfoByID(song.ID, &tempNeslr)
-		retSR.Songs[i].MusicURL = append(retSR.Songs[i].MusicURL, downloadURLByID(tempNeslr.Songs[0].HMusic.DfsID))
+		retSR.Songs[i].SMp3URLs = append(retSR.Songs[i].SMp3URLs, downloadURLByID(tempNeslr.Songs[0].HMusic.DfsID))
 		//strings.Join(retSR.Songs[i].MusicURL, downloadURLByID(tempNeslr.Songs[0].HMusic.DfsID))
 		//strings.Join(retSR.Songs[i].MusicURL, sep string)
 	}
@@ -80,7 +51,7 @@ func debugTest() {
 		log.Fatalf("SLR ERROR: %s", errSlr)
 	}
 	log.Printf("%d :: %s", tempNeslr.Songs[0].HMusic.DfsID, downloadURLByID(tempNeslr.Songs[0].HMusic.DfsID))
-    log.Printf("%d :: %s", tempNeslr.Songs[0].MMusic.DfsID, downloadURLByID(tempNeslr.Songs[0].MMusic.DfsID))
-    log.Printf("%d :: %s", tempNeslr.Songs[0].LMusic.DfsID, downloadURLByID(tempNeslr.Songs[0].LMusic.DfsID))
-    //log.Printf("%s", downloadURLByID(7864806673850166))
+	log.Printf("%d :: %s", tempNeslr.Songs[0].MMusic.DfsID, downloadURLByID(tempNeslr.Songs[0].MMusic.DfsID))
+	log.Printf("%d :: %s", tempNeslr.Songs[0].LMusic.DfsID, downloadURLByID(tempNeslr.Songs[0].LMusic.DfsID))
+	//log.Printf("%s", downloadURLByID(7864806673850166))
 }

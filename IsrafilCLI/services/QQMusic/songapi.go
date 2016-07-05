@@ -1,4 +1,4 @@
-package main
+package qqmusic
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ import (
 	"github.com/ddliu/go-httpclient"
 )
 
-func initHTTPClient() {
+func InitHTTPClient() {
 	httpclient.Defaults(httpclient.Map{
 		httpclient.OPT_USERAGENT: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36",
 		"Accept":                 "*/*",

@@ -50,8 +50,9 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
     - [ ] HTTPClient
        - [x] 自定义header发送GET请求
        - [x] 自定义header进行HTTP POST, 初步的网易搜索获得json
- - [ ] HTTPAPI
+ - [ ] IsrafilCLI (Golang 独立项目)
     - [x] 网易&QQ：搜索歌曲获得详细信息以及获得下载链接
+    - [ ] 基于termui的命令行界面
     - [ ] 其他协议
  - [ ] 其他
     - [x] 持续集成

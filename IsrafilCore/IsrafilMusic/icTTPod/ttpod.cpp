@@ -24,6 +24,89 @@ bool TTPod::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
 {
   // vector<SongBase> rVecSongBase;
   // TODO: add search function
+  std::string rSongSearch = hc->HttpGet(Israfil::strfmt::Format(TTSearchURL, name, 0, 20));
+
+  dbg(rSongSearch);
+
+  json::Document doc;
+  doc.Parse<0>(rSongSearch.c_str());
+
+  if (doc.HasParseError()) {
+    json::ParseErrorCode code = doc.GetParseError();
+    dbgerr(code);
+    return false;
+  }
+  json::Value& qCode = doc["code"];
+
+  if ((qCode.IsInt() == false) || (qCode.GetInt() != 0)) { dbgerr(qCode.GetInt()); return false; }
+  dbg(qCode.GetInt());
+  json::Value& qData = doc["data"];
+
+  if (qData.IsObject() == false) { dbgerr(qData.GetType()); return false; }
+
+  json::Value& qSong = qData["song"];
+
+  if (qSong.IsObject() == false) { dbgerr(qSong.GetType()); return false; }
+  json::Value& qList = qSong["list"];
+
+  if (qList.IsArray() == false) { dbgerr(qList.GetType()); return false; }
+  dbg(qList.Size());
+
+  for (int i = 0; i < qList.Size(); i++) {
+    dbg(i);
+
+    // iteration for songs in search result
+    json::Value& qlSong = qList[i];
+
+    if (qlSong.IsObject() == false) { dbgerr(qlSong.GetType()); return false; }
+    dbg(qlSong["fsong"].GetString());
+    json::Value& qlsGrp = qlSong["grp"];
+    dbg(qlsGrp.IsArray());
+    dbg(qlsGrp.Size());
+    std::string FString;
+
+    // if (qlsGrp.Size() == 0) FString = qlSong["f"].GetString();
+    // else FString = qlsGrp[0]["f"].GetString();
+
+    FString = qlSong["f"].GetString();
+
+    if (isAtString(FString) == true) continue;  // it this is at string, then we
+                                                // dont use it
+    dbg(FString);
+
+
+    std::vector<std::string> FArray;
+    SplitF(FString, FArray);
+    dbg(FArray[FSongName]);
+
+
+    Song tmpSB;
+    tmpSB.sName      = FArray[FSongName];
+    tmpSB.sID        = FArray[FSongID];
+    tmpSB.sDevString = FString;
+    tmpSB.sMp3URLs.push_back(Israfil::strfmt::Format(QMHighMp3URL, tmpSB.sID));
+    tmpSB.isMp3Filled = true;
+    tmpSB.sLyricsURLs.push_back(Israfil::strfmt::Format(QMLyricsURL, StringToInt(tmpSB.sID) % 100, tmpSB.sID));
+    tmpSB.isLyricsFilled = true;
+    tmpSB.sPicURLs.push_back(Israfil::strfmt::Format(QMSongPicURL, FArray[FSongPicID].at(FArray[FSongPicID].length() - 2), FArray[FSongPicID].at(FArray[FSongPicID].length() - 1), FArray[FSongPicID]));
+    tmpSB.isPicFilled = true;
+
+    tmpSB.sSource = srcQQMusic;
+    tmpSB.uID     = Israfil::strfmt::Format("{0}{1}", tmpSB.sSource, tmpSB.sID);
+    tmpSB.sOnly   = qlSong["only"].GetInt() == 1 ? true : false;
+
+    tmpSB.sAlbum.aID       = FArray[FAlbumID];
+    tmpSB.sAlbum.aName     = FArray[FAlbumName];
+    tmpSB.sAlbum.aPicURL   = Israfil::strfmt::Format(QMAlbumPicURL, StringToInt(tmpSB.sAlbum.aID) % 100, tmpSB.sAlbum.aID);
+    tmpSB.isAlbumPicFilled = true;
+
+    Musician tmpMSC;
+    tmpMSC.mID   = FArray[FSingerID];
+    tmpMSC.mName = FArray[FSingerName];
+    tmpSB.sSingers.push_back(tmpMSC);
+
+    rVecSongBase.push_back(tmpSB);
+  }
   return true;
 }
 

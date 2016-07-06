@@ -23,7 +23,7 @@ QQMusic::QQMusic()
 bool QQMusic::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
 {
   // vector<SongBase> rVecSongBase;
-  std::string rSongSearch = hc->HttpGet(Israfil::strfmt::Format(QMSearchURL, 20, name));
+  std::string rSongSearch = hc->HttpGet(Israfil::strfmt::Format(QMSearchURL, 0, 20));
 
   dbg(rSongSearch);
 
@@ -35,23 +35,14 @@ bool QQMusic::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
     dbgerr(code);
     return false;
   }
-  json::Value& qCode = doc["code"];
 
-  if ((qCode.IsInt() == false) || (qCode.GetInt() != 0)) { dbgerr(qCode.GetInt()); return false; }
-    dbg(qCode.GetInt());
-  json::Value& qData = doc["data"];
+  json::Value& tData = doc["data"];
 
-  if (qData.IsObject() == false) { dbgerr(qData.GetType()); return false; }
+  if (tData.IsArray() == false) { dbgerr(tData.GetType()); return false; }
 
-  json::Value& qSong = qData["song"];
+  dbg(tData.Size());
 
-  if (qSong.IsObject() == false) { dbgerr(qSong.GetType()); return false; }
-  json::Value& qList = qSong["list"];
-
-  if (qList.IsArray() == false) { dbgerr(qList.GetType()); return false; }
-    dbg(qList.Size());
-
-  for (int i = 0; i < qList.Size(); i++) {
+  for (int i = 0; i < tData.Size(); i++) {
     dbg(i);
 
     // iteration for songs in search result

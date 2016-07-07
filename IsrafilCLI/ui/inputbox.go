@@ -2,22 +2,25 @@ package ui
 
 import (
 	"bufio"
-	"fmt"
+	"io"
+	//	"fmt"
+	"log"
 	"os"
-
-	clui "github.com/gizak/termui"
 )
 
-func GetInput(Hint string) string {
-	clui.Clear()
-	clui.Render()
-	PauseKeyEvents()
-	PauseRenderTimers()
-	//clui.StopLoop()
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter text: ")
-	text, _ := reader.ReadString('\n')
-	fmt.Println(text)
-	//defer InitUI()
-	return text
+func GetInput() string {
+	fi, err := os.Open("input.txt")
+	if err != nil {
+		log.Fatalf("Error: %s\n", err)
+		return ""
+	}
+	defer fi.Close()
+
+	br := bufio.NewReader(fi)
+	a, _, c := br.ReadLine()
+	if c == io.EOF {
+		log.Fatal("Empty input.txt file!")
+	}
+	log.Printf("Input: %s", string(a))
+	return string(a)
 }

@@ -12,7 +12,7 @@ func InitKeyEvents() {
 		ShowHelpUI()
 	})
 	termui.Handle("/sys/kbd/e", func(termui.Event) {
-		GetInput("Enter Password Here")
+		GetInput()
 		InitUI()
 		InitTimerEvents()
 		InitWindowEvents()

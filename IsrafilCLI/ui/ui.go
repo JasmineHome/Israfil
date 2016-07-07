@@ -1,11 +1,11 @@
 package ui
 
 import (
-	"github.com/gizak/termui"
+	clui "github.com/gizak/termui"
 )
 
 func InitUI() {
-	err := termui.Init()
+	err := clui.Init()
 	if err != nil {
 		panic(err)
 	}
@@ -13,5 +13,11 @@ func InitUI() {
 	InitTimerEvents()
 	InitWindowEvents()
 	InitKeyEvents()
-	termui.Loop()
+	clui.Loop()
+}
+
+func ClearUI() {
+	clui.Clear()
+	clui.Render()
+	PauseRenderTimers()
 }

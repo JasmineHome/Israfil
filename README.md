@@ -11,7 +11,7 @@ Provide Unified Music Service for users in China.
 Project Israfil通过实现各大音乐平台的API来提供统一的音乐服务，消除因版权导致的不方便.**
 
 ## IN EARLY DEVELOPMENT  
-### 早期开发尚不可使用！
+### 早期开发尚不可使用！！！
 Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的开发，研究音乐平台协议只是顺手 ;)  
 如本项目有侵权行为，请和我联系，我会立刻删除Repo  
 
@@ -33,7 +33,7 @@ Israfil App imgui: ImGui **早期开发中**
        - [x] Material Design界面初步
        - [ ] C++ 和 QML之间的caodan通讯 :(
     - [ ] UI(ImGui)
-       - [ ] **(W)撸界面 (OpenGL3后端, GLFW窗口)**
+       - [ ] **撸界面 (OpenGL3后端, GLFW窗口)**
  - [ ] IsrafilCore
     - [ ] 网易云音乐
        - [x] 获取图片和歌词地址
@@ -52,6 +52,7 @@ Israfil App imgui: ImGui **早期开发中**
     - [ ] Universal
        - [x] 封装QQ搜索至IsrafilCore
        - [x] SongList搜索结果重编码为Json供qml调用
+       - [ ] **(W)整合搜索**
     - [ ] HTTPClient
        - [x] 自定义header发送GET请求
        - [x] 自定义header进行HTTP POST, 初步的网易搜索获得json

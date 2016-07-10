@@ -47,7 +47,8 @@ Israfil App imgui: ImGui **早期开发中**
        - [ ] 歌单相关操作，包括合并为Universal歌单
        - [x] 整合音乐结果到Universal Search并加入Json
     - [ ] 天天动听
-       - [ ] **搜索歌曲获得歌曲详情json**
+       - [x] 搜索歌曲获得歌曲详情json
+       - [ ] Universal整合
     - [ ] Universal
        - [x] 封装QQ搜索至IsrafilCore
        - [x] SongList搜索结果重编码为Json供qml调用

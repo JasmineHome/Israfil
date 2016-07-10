@@ -102,7 +102,7 @@ bool QQMusic::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
     Musician tmpMSC;
     tmpMSC.mID   = FArray[FSingerID];
     tmpMSC.mName = FArray[FSingerName];
-    tmpSB.sSingers.push_back(tmpMSC);
+    tmpSB.sSingers.push_back(tmpMSC); //TODO: fix multi singer.
 
     rVecSongBase.push_back(tmpSB);
   }

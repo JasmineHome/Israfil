@@ -36,74 +36,47 @@ bool TTPod::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
     dbgerr(code);
     return false;
   }
-  json::Value& qCode = doc["code"];
 
-  if ((qCode.IsInt() == false) || (qCode.GetInt() != 0)) { dbgerr(qCode.GetInt()); return false; }
-  dbg(qCode.GetInt());
-  json::Value& qData = doc["data"];
+  json::Value& tData = doc["data"];
 
-  if (qData.IsObject() == false) { dbgerr(qData.GetType()); return false; }
+  if (tData.IsArray() == false) { dbgerr(tData.GetType()); return false; }
+    dbg(tData.Size());
 
-  json::Value& qSong = qData["song"];
-
-  if (qSong.IsObject() == false) { dbgerr(qSong.GetType()); return false; }
-  json::Value& qList = qSong["list"];
-
-  if (qList.IsArray() == false) { dbgerr(qList.GetType()); return false; }
-  dbg(qList.Size());
-
-  for (int i = 0; i < qList.Size(); i++) {
+  for (int i = 0; i < tData.Size(); i++) {
     dbg(i);
 
     // iteration for songs in search result
-    json::Value& qlSong = qList[i];
+    json::Value& tSong = tData[i];
 
-    if (qlSong.IsObject() == false) { dbgerr(qlSong.GetType()); return false; }
-    dbg(qlSong["fsong"].GetString());
-    json::Value& qlsGrp = qlSong["grp"];
-    dbg(qlsGrp.IsArray());
-    dbg(qlsGrp.Size());
-    std::string FString;
-
-    // if (qlsGrp.Size() == 0) FString = qlSong["f"].GetString();
-    // else FString = qlsGrp[0]["f"].GetString();
-
-    FString = qlSong["f"].GetString();
-
-    if (isAtString(FString) == true) continue;  // it this is at string, then we
-                                                // dont use it
-    dbg(FString);
-
-
-    std::vector<std::string> FArray;
-    SplitF(FString, FArray);
-    dbg(FArray[FSongName]);
-
+    if (tSong.IsObject() == false) { dbgerr(tSong.GetType()); return false; }
 
     Song tmpSB;
-    tmpSB.sName      = FArray[FSongName];
-    tmpSB.sID        = FArray[FSongID];
-    tmpSB.sDevString = FString;
-    tmpSB.sMp3URLs.push_back(Israfil::strfmt::Format(QMHighMp3URL, tmpSB.sID));
-    tmpSB.isMp3Filled = true;
-    tmpSB.sLyricsURLs.push_back(Israfil::strfmt::Format(QMLyricsURL, StringToInt(tmpSB.sID) % 100, tmpSB.sID));
-    tmpSB.isLyricsFilled = true;
-    tmpSB.sPicURLs.push_back(Israfil::strfmt::Format(QMSongPicURL, FArray[FSongPicID].at(FArray[FSongPicID].length() - 2), FArray[FSongPicID].at(FArray[FSongPicID].length() - 1), FArray[FSongPicID]));
-    tmpSB.isPicFilled = true;
+    tmpSB.sName      = tSong["name"].GetString();
+    tmpSB.sID        = ITS(tSong["songId"].GetInt64());
+    tmpSB.sDevString = tSong["alias"].GetString();
 
-    tmpSB.sSource = srcQQMusic;
+    for (int j = tSong["urlList"].Size() - 1; j = 0; j--) {
+      tmpSB.sMp3URLs.push_back(tSong["urlList"][j]["url"].GetString());
+    }
+
+    tmpSB.sSource = srcTTPod;
     tmpSB.uID     = Israfil::strfmt::Format("{0}{1}", tmpSB.sSource, tmpSB.sID);
-    tmpSB.sOnly   = qlSong["only"].GetInt() == 1 ? true : false;
+    tmpSB.sOnly   = false;
 
-    tmpSB.sAlbum.aID       = FArray[FAlbumID];
-    tmpSB.sAlbum.aName     = FArray[FAlbumName];
-    tmpSB.sAlbum.aPicURL   = Israfil::strfmt::Format(QMAlbumPicURL, StringToInt(tmpSB.sAlbum.aID) % 100, tmpSB.sAlbum.aID);
-    tmpSB.isAlbumPicFilled = true;
+    tmpSB.sAlbum.aID       = ITS(tSong["albumId"].GetInt64());
+    tmpSB.sAlbum.aName     = tSong["albumName"].GetString();
+    tmpSB.sAlbum.aPicURL   = "";
+    tmpSB.isAlbumPicFilled = false; // TODO
 
     Musician tmpMSC;
-    tmpMSC.mID   = FArray[FSingerID];
-    tmpMSC.mName = FArray[FSingerName];
-    tmpSB.sSingers.push_back(tmpMSC);
+    tmpMSC.mID   = ITS(tSong["singerId"].GetInt64());
+    tmpMSC.mName = tSong["singerName"].GetString();
+    tmpSB.sSingers.push_back(tmpMSC); // TODO: fix multi singer.
+
+    tmpSB.sLyricsURLs.push_back(Israfil::strfmt::Format(TTLyricsURL, tSong["singerName"].GetString(), tmpSB.sName));
+    tmpSB.isLyricsFilled = true;
+    tmpSB.sPicURLs.push_back(Israfil::strfmt::Format(TTSongPicURL, tSong["singerName"].GetString()));
+    tmpSB.isPicFilled = true;
 
     rVecSongBase.push_back(tmpSB);
   }
@@ -125,6 +98,7 @@ bool TTPod::FillPicURL(Song& rSongBase) {
   else return false;
 }
 
+//TODO: deal with mp3url session timeout.
 std::string TTPod::GetHMp3URL(Song& rSongBase) {
   if ((rSongBase.isMp3Filled == false) && (FillMp3URL(rSongBase) == true)) return rSongBase.sMp3URLs[0];
   return rSongBase.sMp3URLs[0]; // TODO: fix potential indexoutofbound err;

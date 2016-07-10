@@ -95,6 +95,8 @@ namespace Base {
 // #endif
 // #endif
 
+#define ITS(x) Israfil::strfmt::Format("{0}", x) // Int To String using strfmt
+
 
 ISRAFILCORE_API int StringToInt(std::string Str);
 }

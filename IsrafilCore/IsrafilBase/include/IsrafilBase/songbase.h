@@ -12,7 +12,7 @@ namespace Israfil {
 namespace SongBase {
 #define srcNetease 1
 #define srcQQMusic 2
-#define srcXiami 3
+#define srcTTPod 3
 #define srcKugou 4
 
 struct Musician { // Artists

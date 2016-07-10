@@ -6,8 +6,6 @@
 using std::ostringstream;
 namespace json = rapidjson;
 
-#define ITS(x) Israfil::strfmt::Format("{0}", x) // Int To String using strfmt
-
 namespace Israfil {
 namespace Netease {
 Netease::Netease()

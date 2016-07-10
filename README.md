@@ -17,19 +17,23 @@ Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的�
 
 ## 关于这个项目
 IsrafilCore: (./IsrafilCore)C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**开发中**  
-Israfil App: Qt, QML, Material Design, **早期开发中**。  
-~~_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API **目前完成了网易和qq的搜索与下载地址获取**_~~
+Israfil App quick: Qt, QML, Material Design, **早期开发中**。  
+Israfil App imgui: ImGui **早期开发中**  
+~~_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API 目前完成了网易和qq的搜索与下载地址获取_~~
 
 ## Israfil 进度  
 ### **[开发日志及当前运行截图（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**
 **由于项目在早期开发，您可以点右上[Watch](https://github.com/LER0ever/Israfil/subscription)接收项目开发动态提醒**
 ### [当前代码量统计](https://github.com/LER0ever/Israfil/blob/develop/doc/cloc.md)  
 #### 任务列表:  
+**加粗项代表正在开发的功能, W标记为当前工作项**
  - [ ] IsrafilApp
-    - [ ] UI
+    - [ ] UI(QML)
        - [ ] **放弃qml-material，改用Qt5.7 QuickControls 2.0重写UI界面**
        - [x] Material Design界面初步
        - [ ] C++ 和 QML之间的caodan通讯 :(
+    - [ ] UI(ImGui)
+       - [ ] **(W)撸界面 (OpenGL3后端, GLFW窗口)**
  - [ ] IsrafilCore
     - [ ] 网易云音乐
        - [x] 获取图片和歌词地址
@@ -43,7 +47,7 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
        - [ ] 歌单相关操作，包括合并为Universal歌单
        - [x] 整合音乐结果到Universal Search并加入Json
     - [ ] 天天动听
-       - [ ] 搜索歌曲获得歌曲详情json
+       - [ ] **搜索歌曲获得歌曲详情json**
     - [ ] Universal
        - [x] 封装QQ搜索至IsrafilCore
        - [x] SongList搜索结果重编码为Json供qml调用
@@ -71,6 +75,14 @@ Israfil App: Qt, QML, Material Design, **早期开发中**。
 - Windows的二进制已经被WinDeployQt撸过了，Linux 和 OS X的没有自带Qt库，Linux请用包管理安装(大多数发行版都自带了)，Mac用户再说  
 
 ## Israfil编译
+### 项目依赖
+| 子项目           | 所有依赖项                             |
+| :---:            | :---:                                  |
+| IsrafilCore      | C++, libcurl                           |
+| IsrafilApp/quick | C++, Qt5.7, IsrafilCore, Decoder       |
+| IsrafilApp/imgui | C++, imgui, IsrafilCore, glfw3, mpg123 |
+| IsrafilCLI       | Golang                                 |
+
 ### 准备环境
 **由于用到了QtQuick.Controls 2.0 Qt最小要求版本为5.7**  
 Windows: Qt官网(qt.io)下载Qt For Windows并安装  
@@ -80,7 +92,6 @@ OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载
 ```
 git clone https://github.com/LER0ever/Israfil
 cd Israfil && mkdir build  
-git submodule update --init --recursive #obtain qml-material, to be deleted ...
 cd build && qmake ..
 make
 ```
@@ -98,13 +109,13 @@ See [contribute.md](https://github.com/LER0ever/Israfil/blob/develop/doc/contrib
 | Android  | 5.5 gcc androideabi | ![shield](https://img.shields.io/badge/build-unknown-lightgrey.svg?style=flat-square)       |
 
 ## Copyright
-| 3rd party            | License | Needed by   | in source            |
-| :---:                | :---:   | :---:       | :---:                |
-| Qt Project           | LGPL2   | IsrafilApp  | Universal Dependency |
-| JosephP91/curlcpp    | MIT     | IsrafilCore | Embedded in source   |
-| JieweiWei/md5        | Apache  | IsrafilCore | Embedded in source   |
-| natefinch/pie        | MIT     | HttpAPI     | Embedded in source   |
-| ddliu/go-httpclient  | MIT     | HttpAPI     | Need manual go get   |
+| 3rd party           | License | Needed by        | in source            |
+| :---:               | :---:   | :---:            | :---:                |
+| Qt Project          | LGPL2   | IsrafilApp-Qt    | Universal Dependency |
+| Dear ImGui          | MIT     | IsrafilApp-imgui | Embbeded in source   |
+| JosephP91/curlcpp   | MIT     | IsrafilCore      | Embedded in source   |
+| JieweiWei/md5       | Apache  | IsrafilCore      | Embedded in source   |
+| ddliu/go-httpclient | MIT     | HttpAPI          | Need manual go get   |
 
 网易云音乐API参考了[网易云音乐API分析](https://github.com/yanunon/NeteaseCloudMusic/wiki/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90API%E5%88%86%E6%9E%90)  
 网易云音乐新版API正在学习中...  

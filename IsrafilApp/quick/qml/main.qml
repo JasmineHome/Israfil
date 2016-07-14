@@ -14,7 +14,7 @@ ApplicationWindow {
 
     Settings {
         id: settings
-        property string style: "Material"
+        property string style: "Universal"
     }
 
     header: ToolBar {
@@ -97,7 +97,7 @@ ApplicationWindow {
             }
 
             model: ListModel {
-                ListElement { title: "TabBar"; source: "qrc:/pages/TabBarPage.qml" }
+                ListElement { title: "Israfil Main"; source: "qrc:/pages/TabBar.qml" }
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }

@@ -47,6 +47,15 @@ ifeq ($(UNAME_S), MINGW64_NT-6.3)
    CFLAGS = $(CXXFLAGS)
 endif
 
+ifeq ($(UNAME_S), MSYS_NT-10.0)
+   ECHO_MESSAGE = "Windows"
+   LIBS = -lglfw3 -lgdi32 -lopengl32 -limm32
+
+   CXXFLAGS = -I./imgui/ -I./imgui/gl3w `pkg-config --cflags glfw3`
+   CXXFLAGS += -Wall -Wformat
+   CFLAGS = $(CXXFLAGS)
+endif
+
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

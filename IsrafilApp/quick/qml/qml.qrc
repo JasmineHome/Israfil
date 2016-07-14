@@ -30,5 +30,6 @@
         <file>images/qt-logo@3x.png</file>
         <file>images/qt-logo@4x.png</file>
         <file>pages/SearchPageUI.qml</file>
+        <file>pages/TabBar.qml</file>
     </qresource>
 </RCC>

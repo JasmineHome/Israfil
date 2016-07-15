@@ -19,7 +19,9 @@ Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的�
 IsrafilCore: (./IsrafilCore)C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**开发中**  
 Israfil App quick: Qt, QML, Material Design, **早期开发中**。  
 Israfil App imgui: ImGui **早期开发中**  
-~~_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API 目前完成了网易和qq的搜索与下载地址获取_~~
+~~_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API 目前完成了网易和qq的搜索与下载地址获取_~~  
+##### Github: [LER0ever/Israfil](https://github.com/LER0ever/Israfil)  
+##### 国内镜像: [码云/LER/Israfil](http://git.oschina.net/ler/Israfil)
 
 ## Israfil 进度  
 ### **[开发日志及当前运行截图（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**

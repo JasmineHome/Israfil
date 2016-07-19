@@ -8,13 +8,13 @@ Page {
         currentIndex: swipeView.currentIndex
 
         TabButton {
-            text: "First"
+            text: "歌单"
         }
         TabButton {
-            text: "Second"
+            text: "搜索"
         }
         TabButton {
-            text: "Third"
+            text: "播放列表"
         }
     }
 
@@ -28,23 +28,13 @@ Page {
             width: swipeView.width
             height: swipeView.height
 
-            Column {
-                spacing: 40
-                width: parent.width
+            StackView {
+                id: songListStack
+                anchors.fill: parent
 
-                Label {
-                    width: parent.width
-                    wrapMode: Label.Wrap
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: "TabBar 1 is a bar with icons or text which allows the user"
-                          + "to switch between different subtasks, views, or modes."
-                }
-
-                Image {
-                    source: "qrc:/images/arrows.png"
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
+                initialItem: Qt.resolvedUrl("qrc:/pages/SongListUI.qml")
             }
+
         }
         Pane {
             width: swipeView.width
@@ -72,22 +62,11 @@ Page {
             width: swipeView.width
             height: swipeView.height
 
-            Column {
-                spacing: 40
-                width: parent.width
+            StackView {
+                id: playListStack
+                anchors.fill: parent
 
-                Label {
-                    width: parent.width
-                    wrapMode: Label.Wrap
-                    horizontalAlignment: Qt.AlignHCenter
-                    text: "TabBar 3 is a bar with icons or text which allows the user"
-                          + "to switch between different subtasks, views, or modes."
-                }
-
-                Image {
-                    source: "qrc:/images/arrows.png"
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
+                initialItem: Qt.resolvedUrl("qrc:/pages/PlayListUI.qml")
             }
         }
 

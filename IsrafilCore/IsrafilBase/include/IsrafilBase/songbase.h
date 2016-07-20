@@ -51,9 +51,20 @@ struct Song {
   bool            isAlbumPicFilled = false;
 };
 
-typedef std::vector<Israfil::SongBase::Song>SongList;
+struct SongListInfo {
+  string slName;
+  string slID;
+  string slUID;
+  string slCoverImgURL;
+  bool   slSubscribed;
+  int    slSource;
+};
+
+typedef std::vector<Israfil::SongBase::Song>        SongList;
+typedef std::vector<Israfil::SongBase::SongListInfo>SongListInfoList;
 
 string SongListToJson(SongList inSL);
+string SongListInfoListToJson(SongListInfoList inSLIL);
 }
 }
 

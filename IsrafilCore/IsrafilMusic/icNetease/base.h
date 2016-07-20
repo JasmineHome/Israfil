@@ -10,6 +10,7 @@ const string NEWeApiBase       = NEBase + "/weapi";
 const string NESearchURL       = NEApiBase + "/search/get";
 const string NESongInfo        = NEApiBase + "/song/detail?ids=[{0}]";
 const string NEGetArtistAlbums = NEApiBase + "/artist/albums/{0}?offset={1}&limit={2}";
+const string NEUserSongList    = NEApiBase + "/user/playlist/?offset=0&limit=1001&uid={0}";
 const string NEGetAlbumSongs   = NEApiBase + "/album/{0}";
 const string NESongCDN         = "http://m1.music.126.net/{0}/{1}.{2}";
 const string NELyricsURL       = NEApiBase + "/song/lyric?os=osx&id={0}&lv=-1&kv=-1&tv=-1";

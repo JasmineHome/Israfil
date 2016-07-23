@@ -39,25 +39,25 @@ bool Netease::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
   json::Value& nCode = doc["code"];
 
   if ((nCode.IsInt() == false) || (nCode.GetInt() != 200)) { dbgerr(nCode.GetInt()); return false; }
-      dbg(nCode.GetInt());
+  dbg(nCode.GetInt());
   json::Value& nResult = doc["result"];
 
   if (nResult.IsObject() == false) { dbgerr(nResult.GetType()); return false; }
   json::Value& nSongs = nResult["songs"];
 
   if (nSongs.IsArray() == false) { dbgerr(nSongs.GetType()); return false; }
-      dbg(nSongs.Size());
+  dbg(nSongs.Size());
 
   for (int i = 0; i < nSongs.Size(); i++) { // iteration for songs
-      dbg(i);
+    dbg(i);
     json::Value& neSong = nSongs[i];
 
     if (neSong.IsObject() == false) { dbgerr(neSong.GetType()); return false; }
 
     Song tmpSB;
-      dbg(neSong["id"].GetInt());
+    dbg(neSong["id"].GetInt());
     tmpSB.sID = ITS(neSong["id"].GetInt());
-      dbg(tmpSB.sID);
+    dbg(tmpSB.sID);
     tmpSB.sName   = neSong["name"].GetString();
     tmpSB.sOnly   = neSong["copyrightId"].GetInt() == 0 ? false : true;
     tmpSB.sSource = srcNetease;
@@ -66,7 +66,7 @@ bool Netease::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
     json::Value& neArtists = neSong["artists"];
 
     if (neArtists.IsArray() == false) { dbgerr(neArtists.GetType()); return false; }
-      dbg(neArtists.Size());
+    dbg(neArtists.Size());
 
     for (int j = 0; j < neArtists.Size(); j++) { // iteration for artists
       dbg(j);
@@ -80,12 +80,12 @@ bool Netease::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
 
     json::Value& neAlbum = neSong["album"];
     Album tmpAB;
-      dbg(neAlbum["id"].GetInt());
+    dbg(neAlbum["id"].GetInt());
     tmpSB.sAlbum.aID   = ITS(neAlbum["id"].GetInt());
     tmpSB.sAlbum.aName = neAlbum["name"].GetString();
 
     /*For Netease, Slot1 stores PicID*/
-      dbg(ITS(neAlbum["picId"].GetUint64()));
+    dbg(ITS(neAlbum["picId"].GetUint64()));
     tmpSB.sSlot1 = ITS(neAlbum["picId"].GetUint64());
 
     // dbg(neAlbum["img1v1Url"].GetString());
@@ -98,12 +98,51 @@ bool Netease::SearchSong(std::string name, std::vector<Song>& rVecSongBase)
   return true;
 }
 
+bool Netease::GetUserSongList(std::string userid, std::vector<SongListInfo>& rVecSLIBase)
+{
+  std::string rUserSongList = hc->HttpGet(Israfil::strfmt::Format(NEUserSongList, userid));
+  dbg(rUserSongList);
+  json::Document doc;
+  doc.Parse<0>(rUserSongList.c_str());
+
+  if (doc.HasParseError()) {
+    json::ParseErrorCode code = doc.GetParseError();
+    dbgerr(code);
+    return false;
+  }
+
+  json::Value& nCode = doc["code"];
+
+  if ((nCode.IsInt() == false) || (nCode.GetInt() != 200)) { dbgerr(nCode.GetInt()); return false; }
+  dbg(nCode.GetInt());
+
+  json::Value& nPlayList = doc["playlist"];
+
+  if (nPlayList.IsArray() == false) { dbgerr(nPlayList.GetType()); return false; }
+  dbg(nPlayList.Size());
+
+  for (int i = 0; i < nPlayList.Size(); i++) {
+    json::Value& nePlayListInfo = nPlayList[i];
+    SongListInfo tmpSLI;
+
+    if (nePlayListInfo.IsObject() == false) { dbgerr(nePlayListInfo.GetType()); return false; }
+    tmpSLI.slSubscribed  = nePlayListInfo["subscribed"].GetBool();
+    tmpSLI.slCoverImgURL = nePlayListInfo["coverImgUrl"].GetString();
+    tmpSLI.slID          = ITS(nePlayListInfo["id"].GetInt64());
+    tmpSLI.slName        = nePlayListInfo["name"].GetString();
+    tmpSLI.slUID         = Israfil::strfmt::Format("%d%s", srcNetease, tmpSLI.slID);
+    tmpSLI.slSource      = srcNetease;
+
+    rVecSLIBase.push_back(tmpSLI);
+  }
+}
+
 // Fill the Mp3 URL by HTTP get the song detail page
 bool Netease::FillMp3URL(Song& rSongBase) {
   std::string rSongDetails = hc->HttpGet(Israfil::strfmt::Format(NESongInfo, rSongBase.sID));
 
-      dbg(Israfil::strfmt::Format(NESongInfo, rSongBase.sID));
-      dbg(rSongDetails);
+  dbg(Israfil::strfmt::Format(NESongInfo, rSongBase.sID));
+  dbg(rSongDetails);
   json::Document doc;
   doc.Parse<0>(rSongDetails.c_str());
 
@@ -119,14 +158,14 @@ bool Netease::FillMp3URL(Song& rSongBase) {
 
   json::Value& nSongs = doc["songs"]; // TODO: add err handle;
   assert(nSongs.IsArray());
-      dbg(nSongs.Size());
+  dbg(nSongs.Size());
   json::Value& nSong = nSongs[0];
-      dbg("nSong SUC");
+  dbg("nSong SUC");
 
   if (nSong.HasMember("hMusic")) {
-      dbg("hMusic SUC");
+    dbg("hMusic SUC");
     json::Value& hMusic = nSong["hMusic"];
-      dbg("hMusic SUC2");
+    dbg("hMusic SUC2");
 
     if ((hMusic.IsNull() == false) && hMusic.HasMember("dfsId")) {
       dbg("IF dfsId SUC");
@@ -246,9 +285,9 @@ std::string Netease::encryptID(std::string dfsID)
 {
   Israfil::crypto::crypto *crt = new Israfil::crypto::crypto();
 
-  int  magiclength = NEMagicKey.length();
-  int  idlength    = dfsID.length();
-  auto dfsArray    = crt->StrToByteArray(dfsID);
+  int magiclength = NEMagicKey.length();
+  int idlength    = dfsID.length();
+  auto dfsArray = crt->StrToByteArray(dfsID);
 
   vector<unsigned char> strans;
 

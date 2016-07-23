@@ -17,6 +17,8 @@ public:
   std::string encryptID(std::string id);
   bool        SearchSong(std::string        name,
                          std::vector<Song>& rVecSongBase);
+  bool        GetUserSongList(std::string                userid,
+                              std::vector<SongListInfo>& rVecSLIBase);
   bool        FillMp3URL(Song& rSongBase);
   std::string GetHMp3URL(Song& rSongBase);
   bool        FillPicURL(Song& rSongBase);

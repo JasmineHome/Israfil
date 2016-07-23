@@ -18,6 +18,11 @@ TEST_CASE("Israfil::Netease Basic Tests - Search", "Netease") {
   SongList sl;
   ne->SearchSong("盛世回首", sl);
   ne->FillLyricsURL(sl[0]);
-  std::cout<< "Lyrics::::: " << ne->GetLyrics(sl[0]) << std::endl;
+  std::cout<< "First Lyrics::::: " << ne->GetLyrics(sl[0]) << std::endl;
   std::cout << ne->encryptID("7947270045631279") << std::endl;
+
+  SongListInfoList slil;
+  ne->GetUserSongList("46123345", slil);
+  dbg(slil.size());
+  dbg(slil[3].slName);
 }

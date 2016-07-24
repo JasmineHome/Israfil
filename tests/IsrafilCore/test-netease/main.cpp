@@ -25,4 +25,5 @@ TEST_CASE("Israfil::Netease Basic Tests - Search", "Netease") {
   ne->GetUserSongList("46123345", slil);
   dbg(slil.size());
   dbg(slil[3].slName);
+  dbg(SongListInfoListToJson(slil));
 }

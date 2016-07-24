@@ -13,4 +13,7 @@ IsrafilCore.depends = icQQMusic
 IsrafilCore.depends = IsrafilBase
 IsrafilCore.depends = IsrafilNetwork
 
+IsrafilMusic.depends = IsrafilCore
+IsrafilMusic.depends = IsrafilNetwork
+IsrafilMusic.depends = IsrafilBase
 

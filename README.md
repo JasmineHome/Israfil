@@ -42,7 +42,7 @@ Israfil App imgui: ImGui **早期开发中**
        - [x] 获取Mp3地址函数生效，并合并入search
        - [x] 完成网易搜索，整合进Universal Search，结果尚未排序
        - [ ] Universal 歌单整合
-       - [ ] 用户登陆后相关操作
+       - [x] 免登陆获取用户歌单
        - [ ] 跳进新API大坑
     - [ ] QQ音乐
        - [x] 获得歌曲歌词、专辑图片及下载链接(包括无损)

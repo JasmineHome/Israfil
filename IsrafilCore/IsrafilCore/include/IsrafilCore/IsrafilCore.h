@@ -9,6 +9,7 @@
 #include <IsrafilBase/IsrafilBase.h>
 #include <IsrafilNetwork/IsrafilNetwork.h>
 #include <qqmusic.h>
+#include <netease.h>
 
 namespace Israfil {
 namespace Core {
@@ -21,6 +22,7 @@ public:
 private:
 
   Israfil::QQMusic::QQMusic *pQM;
+  Israfil::Netease::Netease *pNE;
 };
 } // namespace Core
 } // namespace Israfil

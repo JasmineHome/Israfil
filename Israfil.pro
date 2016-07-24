@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
-SUBDIRS += IsrafilCore IsrafilApp doc tests
+SUBDIRS += IsrafilCore doc tests IsrafilApp
 CONFIG += C++11
 
 OTHER_FILES += README.md \

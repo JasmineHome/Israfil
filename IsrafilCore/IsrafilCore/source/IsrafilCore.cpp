@@ -5,6 +5,7 @@ namespace Core {
 IsrafilCore::IsrafilCore()
 {
   pQM = new Israfil::QQMusic::QQMusic();
+  pNE = new Israfil::Netease::Netease();
 }
 
 SongList IsrafilCore::SearchSong(std::string strName)
@@ -13,7 +14,7 @@ SongList IsrafilCore::SearchSong(std::string strName)
   SongList retSL;
   bool     bSS = pQM->SearchSong(strName, retSL);
 
-  // if (bSS == false) return;
+  if (bSS == true) bSS = pNE->SearchSong(strName, retSL);
   dbg(bSS);
   return retSL;
 }

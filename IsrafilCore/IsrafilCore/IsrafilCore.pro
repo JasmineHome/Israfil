@@ -13,8 +13,7 @@ INCLUDEPATH += \
     $$SOURCE_TREE/IsrafilCore/ext/curlcpp/include \
     $$SOURCE_TREE/IsrafilCore/ext/rapidjson/include \
     $$SOURCE_TREE/IsrafilCore/IsrafilMusic/icQQMusic \
-
-
+    $$SOURCE_TREE/IsrafilCore/IsrafilMusic/icNetease
 
 SOURCES += \
     source/IsrafilCore.cpp
@@ -22,4 +21,4 @@ SOURCES += \
 HEADERS += \
     include/IsrafilCore/IsrafilCore.h
 
-LIBS += -L$$BUILD_TREE/bin -lcurlcpp -lcurl -lIsrafilBase -lIsrafilNetwork -licQQMusic
+LIBS += -L$$BUILD_TREE/bin -lcurlcpp -lcurl -lIsrafilBase -lIsrafilNetwork -licQQMusic -licNetease

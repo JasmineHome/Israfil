@@ -15,11 +15,12 @@ INCLUDEPATH += \
     $$SOURCE_TREE/IsrafilCore/IsrafilNetwork/include \
     $$SOURCE_TREE/IsrafilCore/IsrafilCore/include \
     $$SOURCE_TREE/IsrafilCore/IsrafilMusic/icQQMusic \
+    $$SOURCE_TREE/IsrafilCore/IsrafilMusic/icNetease \
     $$SOURCE_TREE/IsrafilCore/IsrafilPrefix \
     $$SOURCE_TREE/IsrafilCore/ext/rapidjson/include \
     $$SOURCE_TREE/IsrafilCore/ext/curlcpp/include
 
-LIBS += -L$$BUILD_TREE/bin -lcurl -lcurlcpp -lIsrafilNetwork -lIsrafilCore -licQQMusic -lIsrafilBase
+LIBS += -L$$BUILD_TREE/bin -lcurl -lcurlcpp -lIsrafilNetwork -lIsrafilCore -licQQMusic -licNetease -lIsrafilBase
 
 #    qml/icons/icons.qrc
 

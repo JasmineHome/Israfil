@@ -16,6 +16,7 @@ public:
 
   explicit IsrafilCoreQt(QObject *parent = 0);
   Q_INVOKABLE QString searchSong(QString Name);
+  Q_INVOKABLE QString getUserSongList(QString UserID);
 
 private:
 

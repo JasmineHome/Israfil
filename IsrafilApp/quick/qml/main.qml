@@ -5,6 +5,8 @@ import QtQuick.Controls.Material 2.0
 import QtQuick.Controls.Universal 2.0
 import Qt.labs.settings 1.0
 
+import IsrafilCore 1.0
+
 ApplicationWindow {
     id: mainwindow
     width: 720
@@ -15,6 +17,10 @@ ApplicationWindow {
     Settings {
         id: settings
         property string style: "Universal"
+    }
+
+    IsrafilCoreQt {
+        id: isrc
     }
 
     header: ToolBar {

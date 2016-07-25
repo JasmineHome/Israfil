@@ -13,3 +13,11 @@ QString IsrafilCoreQt::searchSong(QString Name)
 
   return qRet;
 }
+
+QString IsrafilCoreQt::getUserSongList(QString UserID)
+{
+  std::string strRet = Israfil::SongBase::SongListInfoListToJson(pIC->GetUserSongList(UserID.toStdString()));
+  QString     qRet   = QString(QString::fromStdString(strRet));
+
+  return qRet;
+}

@@ -26,5 +26,13 @@ SongListInfoList IsrafilCore::GetUserSongList(std::string strUserID) {
   if (bSuc == false) dbgerr(strUserID);
   return retSLIL;
 }
+
+SongList IsrafilCore::GetSongsInSLD(std::string strSongListID){
+  //SongList retSL;
+  SongListDetail tmpSLD;
+  pNE->GetSongListDetail(strSongListID, tmpSLD);
+  return tmpSLD.slTracks;
+}
+
 }
 }

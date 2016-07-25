@@ -4,20 +4,22 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import IsrafilCore 1.0
 import "../scripts/json.js" as Json
-import "../scripts/SongListInfoList.js" as SLIL
+import "../scripts/SongList.js" as SLIL
 
 Item {
     property var delegateComponentMap: {
         "ItemDelegate": itemDelegateComponent,
                 "RadioDelegate": radioDelegateComponent,
     }
+
+    property string userSongListInfo: "";
+    property string curSongListSongs: "";
+    property string userid: "46123345";
+
     IsrafilCoreQt {
         id: isrc
     }
 
-    //property var uslObject : Json.JsonToObject(IsrafilCoreQt.getUserSongList("46123345"))
-    //property var uslNames : SLIL.GetSLILNames(IsrafilCoreQt.getUserSongList("46123345"))
-    //property var asdf: SLIL.SetListModel(isrc.getUserSongList("46123345"));
     Component {
         id: itemDelegateComponent
 
@@ -38,11 +40,19 @@ Item {
         RadioDelegate {
             text: labelText
             ButtonGroup.group: radioButtonGroup
+            onClicked: {
+                console.log("Clicked: " + curListIndex)
+                //SLIL.
+                console.log(songListModel.get(curListIndex).id)
+                lbSongsTitle.text = songListModel.get(curListIndex).text
+                SLIL.setSongsModel(songListModel.get(curListIndex).id)
+                console.log("setSongsModel complete")
+            }
         }
     }
 
     ColumnLayout {
-        id: column
+        id: columnLeft
         spacing: 20
         anchors.fill: parent
         anchors.topMargin: 20
@@ -63,36 +73,8 @@ Item {
             model: ListModel {
                 id: songListModel
                 Component.onCompleted: {
-                    SLIL.setListModel(isrc.getUserSongList("46123345"));
-                    /*songListModel.append({"type":"RadioDelegate", "text":"SLILRooslName","spec":"网易云音乐"});
-                    var jsonobj = JSON.parse(isrc.getUserSongList("46123345"));
-                    //console.log(strJson)
-                    var SLILRoot = jsonobj["SongListInfoList"];
-                    console.log(SLILRoot[0].slName)
-                    //songListModel.append({"type":"RadioDelegate", "text":SLILRoot[0].slName,"spec":"网易云音乐"});
-                    songListModel.append({"type":"RadioDelegate", "text":"SLILRoot[0].slName","spec":"网易云音乐"});*/
-                    /*for (var i=0; i<SLILRoot.length; i++) {
-                        songListModel.append({"type":"RadioDelegate", "text":SLILRoot[i].slName,"spec":"网易云音乐"});
-                    }*/
-
-
-                    //songListModel.append({"type":"RadioDelegate","text":"RadioDelegadte","spec":"Universal"});
+                    SLIL.setSongListModel(userid);
                 }
-
-                //ListElement { type: "RadioDelegate"; text: "RadioDelegate"; spec: "Universal" }
-                //ListElement { type: "RadioDelegate"; text: "RadioDelegate"; spec: "Universal" }
-                //ListElement { type: "RadioDelegate"; text: "RadioDelegate"; spec: "Universal" }
-                //ListElement { type: "RadioDelegate"; text: "RadioDelegate"; spec: "Universal" }
-                //Repeater{
-                //    model: uslNames
-                //   ListElement { type: "RadioDelegate"; text: uslNames[index] ; spec: "网易云音乐" }
-                //}
-
-                //ListElement { type: "RadioDelegate"; text: "RadioDelegate"; spec: "网易云音乐" }
-                //ListElement { type: "RadioDelegate"; text: "RadioDelegate"; spec: "网易云音乐" }
-                //ListElement { type: "RadioDelegate"; text: "RadioDelegate"; spec: "网易云音乐" }
-                //ListElement { type: "RadioDelegate"; text: "RadioDelegate"; spec: "网易云音乐" }
-
             }
 
             section.property: "spec"
@@ -109,12 +91,67 @@ Item {
 
             delegate: Loader {
                 id: delegateLoader
-                width: listView.width
+                width: columnLeft.width
                 sourceComponent: delegateComponentMap[type]
 
                 property string labelText: text
                 property ListView view: listView
-                property int ourIndex: index
+                property int curListIndex: index
+
+            }
+        }
+    }
+
+    ColumnLayout {
+        id: columnRight
+        spacing: 20
+        anchors.fill: parent
+        anchors.topMargin: 20
+        anchors.leftMargin: parent.width/3
+        anchors.rightMargin: 0
+
+        Label {
+            id: lbSongsTitle
+            Layout.fillWidth: true
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: "请选择一个左边的歌单"
+        }
+
+        ListView {
+            id: listViewSong
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            clip: true
+            model: ListModel {
+                id: songModel
+                Component.onCompleted: {
+                    //SLIL.setListModel(isrc.getUserSongList("46123345"));
+                    //SLIL.setSongsModel()
+                }
+            }
+
+            section.property: "spec"
+            section.delegate: Pane {
+                width: listView.width
+                height: sectionLabel.implicitHeight + 20
+
+                Label {
+                    id: sectionLabel
+                    text: section
+                    anchors.centerIn: parent
+                }
+            }
+
+            delegate: Loader {
+                id: delegateSongLoader
+                width: columnRight.width
+                sourceComponent: delegateComponentMap[type]
+
+                property string labelText: text
+                property ListView view: listView
+                property int curSongIndex: index
+
             }
         }
     }

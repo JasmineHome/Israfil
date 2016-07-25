@@ -137,6 +137,90 @@ bool Netease::GetUserSongList(std::string userid, std::vector<SongListInfo>& rVe
   }
 }
 
+bool Netease::GetSongListDetail(std::string slID, SongListDetail& sld)
+{
+  std::string rSongListDetail = hc->HttpGet(Israfil::strfmt::Format(NESongListDetail, slID));
+
+  // dbg(Israfil::strfmt::Format(NESongListDetail, slID));
+  dbg(rSongListDetail);
+  json::Document doc;
+  doc.Parse<0>(rSongListDetail.c_str());
+
+  if (doc.HasParseError()) {
+    json::ParseErrorCode code = doc.GetParseError();
+    dbgerr(code);
+    return false;
+  }
+  json::Value& nCode = doc["code"];
+
+  if ((nCode.IsInt() == false) || (nCode.GetInt() != 200)) { dbgerr(nCode.GetInt()); return false; }
+  dbg(nCode.GetInt());
+
+  json::Value& nResult = doc["result"];
+  sld.slSubscribed  = nResult["subscribed"].GetBool();
+  sld.slCoverImgURL = nResult["coverImgUrl"].GetString();
+  sld.slID          = ITS(nResult["id"].GetInt());
+  sld.slName        = nResult["name"].GetString();
+  sld.slUID         = Israfil::strfmt::Format("%d%s", srcNetease, sld.slID);
+  sld.slSource      = srcNetease;
+  dbg(sld.slName);
+  json::Value& slTracks = nResult["tracks"];
+
+  if (slTracks.IsArray() == false) { dbgerr(slTracks.GetType()); return false; }
+  dbg(slTracks.Size());
+
+  for (int i = 0; i < slTracks.Size(); i++) {
+    json::Value& track = slTracks[i];
+    Song tmpSB;
+    dbg(track["id"].GetInt());
+    tmpSB.sID = ITS(track["id"].GetInt());
+    dbg(tmpSB.sID);
+    tmpSB.sName   = track["name"].GetString();
+    tmpSB.sOnly   = track["copyrightId"].GetInt() == 0 ? false : true;
+    tmpSB.sSource = srcNetease;
+    tmpSB.uID     = Israfil::strfmt::Format("{0}{1}", srcNetease, tmpSB.sID);
+    dbg(tmpSB.uID);
+
+
+    json::Value& hMusic = track["hMusic"];
+    //TODO: select the highest rate;
+    if (hMusic.IsNull() == false) {
+      std::string did = ITS(hMusic["dfsId"].GetUint64());
+      tmpSB.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, track["hMusic"]["extension"].GetString()));
+      tmpSB.isMp3Filled = true;
+      dbg(tmpSB.sMp3URLs[0]);
+    }
+    json::Value& neArtists = track["artists"];
+
+    if (neArtists.IsArray() == false) { dbgerr(neArtists.GetType()); return false; }
+    dbg(neArtists.Size());
+
+    for (int j = 0; j < neArtists.Size(); j++) { // iteration for artists
+      dbg(j);
+      json::Value& neMusician = neArtists[j];
+      Musician     tmpMC;
+
+      tmpMC.mID   = ITS(neMusician["id"].GetInt());
+      tmpMC.mName = neMusician["name"].GetString();
+      tmpSB.sSingers.push_back(tmpMC);
+    }
+
+    json::Value& neAlbum = track["album"];
+    Album tmpAB;
+    dbg(neAlbum["id"].GetInt());
+    tmpSB.sAlbum.aID   = ITS(neAlbum["id"].GetInt());
+    tmpSB.sAlbum.aName = neAlbum["name"].GetString();
+
+    /*For Netease, Slot1 stores PicID*/
+    dbg(ITS(neAlbum["picId"].GetUint64()));
+    tmpSB.sSlot1 = ITS(neAlbum["picId"].GetUint64());
+
+    sld.slTracks.push_back(tmpSB);
+  }
+
+  return true;
+}
+
 // Fill the Mp3 URL by HTTP get the song detail page
 bool Netease::FillMp3URL(Song& rSongBase) {
   std::string rSongDetails = hc->HttpGet(Israfil::strfmt::Format(NESongInfo, rSongBase.sID));

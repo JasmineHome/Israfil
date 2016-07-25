@@ -60,6 +60,16 @@ struct SongListInfo {
   int    slSource;
 };
 
+struct SongListDetail {
+  string                              slName;
+  string                              slID;
+  string                              slUID;
+  string                              slCoverImgURL;
+  bool                                slSubscribed;
+  int                                 slSource;
+  std::vector<Israfil::SongBase::Song>slTracks;
+};
+
 typedef std::vector<Israfil::SongBase::Song>        SongList;
 typedef std::vector<Israfil::SongBase::SongListInfo>SongListInfoList;
 

@@ -19,6 +19,8 @@ public:
                          std::vector<Song>& rVecSongBase);
   bool        GetUserSongList(std::string                userid,
                               std::vector<SongListInfo>& rVecSLIBase);
+  bool        GetSongListDetail(std::string     slID,
+                                SongListDetail& sld);
   bool        FillMp3URL(Song& rSongBase);
   std::string GetHMp3URL(Song& rSongBase);
   bool        FillPicURL(Song& rSongBase);

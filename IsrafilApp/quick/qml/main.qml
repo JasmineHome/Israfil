@@ -25,7 +25,8 @@ ApplicationWindow {
 
     header: ToolBar {
         Material.foreground: "white"
-        Material.primary: "blue"
+        Material.primary: "#03A9F4"
+        Material.accent: "#4CAF50"
 
         RowLayout {
             spacing: 20

@@ -19,6 +19,7 @@ public:
   IsrafilCore();
   SongList SearchSong(std::string strName);
   SongListInfoList GetUserSongList(std::string strUserID);
+  SongList GetSongsInSLD(std::string strSongListID);
 
 private:
 

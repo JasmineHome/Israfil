@@ -15,8 +15,10 @@ class IsrafilCoreQt : public QObject {
 public:
 
   explicit IsrafilCoreQt(QObject *parent = 0);
+  //all returns json;
   Q_INVOKABLE QString searchSong(QString Name);
   Q_INVOKABLE QString getUserSongList(QString UserID);
+  Q_INVOKABLE QString getSongsInSLD(QString SongListID);
 
 private:
 

@@ -34,6 +34,6 @@
         <file>pages/SongListUI.qml</file>
         <file>pages/PlayListUI.qml</file>
         <file>scripts/json.js</file>
-        <file>scripts/SongListInfoList.js</file>
+        <file>scripts/SongList.js</file>
     </qresource>
 </RCC>

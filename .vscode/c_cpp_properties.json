@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": ["/usr/include"]
+        },
+        {
+            "name": "Linux",
+            "includePath": ["/usr/include"]
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "c:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include",
+                "C:/Qt/Qt5.7.0/5.7/mingw53_32/include",
+                "C:/Qt/Qt5.7.0/Tools/mingw530_32/i686-w64-mingw32/include"
+            ]
+        }
+    ],
+    "clang_format" : {
+        "style" : "file",
+        "fallback-style" : "LLVM",
+        "sort-includes" : false
+    }
+}

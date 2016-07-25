@@ -20,6 +20,7 @@ const string QMSongDetailURL = "http://s.plcloud.music.qq.com/fcgi-bin/fcg_list_
 const string QMSongPicURL    = "http://i.gtimg.cn/music/photo/mid_album_300/{0}/{1}/{2}.jpg";
 const string QMAlbumPicURL   = "http://imgcache.qq.com/music/photo/album/{0}/albumpic_{1}_0.jpg";
 const string QMLyricsURL     = "http://music.qq.com/miniportal/static/lyric/{0}/{1}.xml";
+const string QMSongListURL   = "http://i.y.qq.com/qzone-music/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?type=1&json=1&utf8=1&onlysong=0&nosign=1&disstid={0}&g_tk=938407465&loginUin=0&hostUin=0&format=jsonp&inCharset=GB2312&outCharset=utf-8&notice=0&needNewCode=0"
 
 #define FSongID 0
 #define FSongName 1

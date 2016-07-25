@@ -10,3 +10,4 @@ build*/
 build/
 glide.lock
 qmllive
+.browse.*

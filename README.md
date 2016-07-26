@@ -16,26 +16,26 @@ Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的�
 如本项目有侵权行为，请和我联系，我会立刻删除Repo  
 
 ## 关于这个项目
-IsrafilCore: (./IsrafilCore)C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**开发中**  
+IsrafilCore: (./IsrafilCore)纯C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**开发中**  
 Israfil App quick: Qt, QML, Material Design, **早期开发中**。  
-Israfil App imgui: ImGui **早期开发中**  
-~~_Israfil HTTP API: (./HttpAPI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API 目前完成了网易和qq的搜索与下载地址获取_~~  
+~~_IsrafilCLI(暂停): (./IsrafilCLI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API 目前完成了网易和qq的搜索与下载地址获取_~~  
 ##### Github: [LER0ever/Israfil](https://github.com/LER0ever/Israfil)  
 ##### 国内镜像: [码云/LER/Israfil](http://git.oschina.net/ler/Israfil)
 
 ## Israfil 进度  
-### **[开发日志及当前运行截图（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**
+### **[开发日志及当前运行截图（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**  
+### **没有人点上面的链接，所以这儿强行插一张截图：**
+左边为Windows Universal风格，右边为Material Design，可在P4设置中选择
+![scnsht](http://i1.piimg.com/7134/2b3a78df28e9e4e9.png)
 **由于项目在早期开发，您可以点右上[Watch](https://github.com/LER0ever/Israfil/subscription)接收项目开发动态提醒**
 ### [当前代码量统计](https://github.com/LER0ever/Israfil/blob/develop/doc/cloc.md)  
 #### 任务列表:  
-**加粗项代表正在开发的功能, W标记为当前工作项**
+**加粗项代表正在开发的功能**
  - [ ] IsrafilApp
     - [ ] UI(QML)
-       - [ ] **放弃qml-material，改用Qt5.7 QuickControls 2.0重写UI界面**
+       - [ ] **Qt5.7 QuickControls 2.0 UI界面**
        - [x] Material Design界面初步
        - [ ] C++ 和 QML之间的caodan通讯 :(
-    - [ ] UI(ImGui)
-       - [ ] **撸界面 (OpenGL3后端, GLFW窗口)**
  - [ ] IsrafilCore
     - [ ] 网易云音乐
        - [x] 获取图片和歌词地址
@@ -54,11 +54,11 @@ Israfil App imgui: ImGui **早期开发中**
     - [ ] Universal
        - [x] 封装QQ搜索至IsrafilCore
        - [x] SongList搜索结果重编码为Json供qml调用
-       - [ ] **(W)整合搜索**
-    - [ ] HTTPClient
+       - [ ] **整合搜索**
+    - [x] HTTPClient
        - [x] 自定义header发送GET请求
        - [x] 自定义header进行HTTP POST, 初步的网易搜索获得json
- - [ ] IsrafilCLI (Golang 独立项目)
+ - [ ] IsrafilCLI (Golang 独立项目，**暂停**)
     - [x] 网易&QQ：搜索歌曲获得详细信息以及获得下载链接
     - [ ] 基于termui的命令行界面
     - [ ] termui的editbox实现
@@ -66,13 +66,13 @@ Israfil App imgui: ImGui **早期开发中**
  - [ ] 其他
     - [x] 持续集成
        - [x] 完成全自动化编译+上传二进制文件
-       - [ ] **紧急: Travis改用Qt5.7编译**
-       - [ ] 添加自动配置cython及网易新API
+       - [x] Travis改用Qt5.7编译
+       - [ ] ~~添加自动配置cython及网易新API~~
 
 ## Israfil下载
 ### [LER0ever/Israfil-builds](https://github.com/LER0ever/Israfil-builds)  
 - **直接点上面的链接↸↸↸，(前提是如果你完全不知道这整个页面在说什么的话，)上面的链接会带你去下载地址**
-- 目前CI编译脚本待修复，主要是Qt 5.7的问题，自动编译暂停。
+- 目前编译脚本不支持macOS，主要是Qt 5.7的问题。
 - 注意，这个repo里的文件是本项目实时编译结果，**尚在早期开发，下下来也没什么用**  
 - Releases里的格式为“操作系统 - 编译工具链 - 版本号 - 时间戳”，如macx-clang-0.1.0.0003-115355  
 - 每次commit过后利用CI打Tag然后将Artifacts上传至Releases，Releases数量可能会较多，选择最近的二进制下载即可  
@@ -83,17 +83,21 @@ Israfil App imgui: ImGui **早期开发中**
 | 子项目           | 所有依赖项                             |
 | :---:            | :---:                                  |
 | IsrafilCore      | C++, libcurl                           |
-| IsrafilApp/quick | C++, Qt5.7, IsrafilCore, Decoder       |
-| IsrafilApp/imgui | C++, imgui, IsrafilCore, glfw3, mpg123 |
+| IsrafilApp/quick | C++, Qt5.7, IsrafilCore, 解码器       |
 | IsrafilCLI       | Golang                                 |
 
 ### 准备环境
 **由于用到了QtQuick.Controls 2.0 Qt最小要求版本为5.7**  
 Windows: Qt官网(qt.io)下载Qt For Windows并安装  
-Linux: sudo $包管理安装命令 qt5-default (如```sudo apt-get install qt5-default```, ```sudo pacman -S qt5```)  
+Linux: 
+```bash
+sudo apt-add-repository --yes ppa:beineri/opt-qt57-trusty  
+sudo apt-get -y update -qq  
+sudo apt-get -y install qt57-meta-full
+```
 OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载安装包安装  
 ### 编译
-```
+```bash
 git clone https://github.com/LER0ever/Israfil
 cd Israfil && mkdir build  
 cd build && qmake ..
@@ -107,22 +111,21 @@ See [contribute.md](https://github.com/LER0ever/Israfil/blob/develop/doc/contrib
 ## CI Status  
 | Platform | Qt & Compiler       | Status                                                                                      |
 | :---:    | :---:               | :---:                                                                                       |
-| Linux    | 5.6 Clang & GCC     | ![traviscistatus](https://api.travis-ci.org/LER0ever/Israfil.svg)                           |
-| OS X     | 5.6 Clang & GCC     | ![traviscistatus](https://api.travis-ci.org/LER0ever/Israfil.svg)                           |
+| Linux    | 5.7 GCC     | ![traviscistatus](https://api.travis-ci.org/LER0ever/Israfil.svg)                           |
+| OS X     | 5.6 Clang   | ![traviscistatus](https://api.travis-ci.org/LER0ever/Israfil.svg)                           |
 | Windows  | 5.7 MinGW gcc       | ![appvayorstatus](https://ci.appveyor.com/api/projects/status/14ny9o50m4xb0c6g) |
 | Android  | 5.5 gcc androideabi | ![shield](https://img.shields.io/badge/build-unknown-lightgrey.svg?style=flat-square)       |
 
 ## Copyright
 | 3rd party           | License | Needed by        | in source            |
 | :---:               | :---:   | :---:            | :---:                |
-| Qt Project          | LGPL2   | IsrafilApp-Qt    | Universal Dependency |
-| Dear ImGui          | MIT     | IsrafilApp-imgui | Embbeded in source   |
+| Qt Project          | LGPL2   | IsrafilApp       | Universal Dependency |
 | JosephP91/curlcpp   | MIT     | IsrafilCore      | Embedded in source   |
 | JieweiWei/md5       | Apache  | IsrafilCore      | Embedded in source   |
 | ddliu/go-httpclient | MIT     | HttpAPI          | Need manual go get   |
 
 网易云音乐API参考了[网易云音乐API分析](https://github.com/yanunon/NeteaseCloudMusic/wiki/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90API%E5%88%86%E6%9E%90)  
-网易云音乐新版API正在学习中...  
+网易云音乐新版/eapi正在研究中...  
 Israfil中的歌曲和歌单版权归各大音乐平台所有  
 
 ### LICENSE

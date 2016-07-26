@@ -13,6 +13,8 @@ ApplicationWindow {
     height: 480
     visible: true
     title: "Israfil"
+    property int bottomHeight: 80
+    function dp(a) {return a;}
 
     Settings {
         id: settings
@@ -82,7 +84,7 @@ ApplicationWindow {
     Drawer {
         id: drawer
         width: Math.min(mainwindow.width, mainwindow.height) / 3 * 2
-        height: mainwindow.height
+        height: mainwindow.height// - bottomHeight ///fix for bottom
 
         ListView {
             id: listView
@@ -113,6 +115,7 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
+        anchors.bottomMargin: bottomHeight
 
         initialItem: Pane {
             id: pane
@@ -144,8 +147,36 @@ ApplicationWindow {
                 source: "qrc:/images/arrow.png"
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
-
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        drawer.open();
+                    }
+                }
             }
+            /*
+            Image {
+                id: arrowtest
+                source: "qrc:/images/arrow.png"
+                anchors.left: parent.left
+                anchors.leftMargin: 30
+                anchors.bottom: parent.bottom
+                Button {
+                    id: testButton
+                    text: ""
+                    onClicked: {
+                        styleBox.currentIndex = styleBox.styleIndex
+                        settingsPopup.close()
+                    }
+                    anchors.fill: parent
+                    Material.background: "transparent"
+                    Material.elevation: 1
+
+                    //Layout.preferredWidth: 0
+                    //Layout.fillWidth: true
+                }
+            }
+            */
         }
     }
 
@@ -269,4 +300,166 @@ ApplicationWindow {
             }
         }
     }
+
+    Rectangle {
+        id: rectControls
+        color:'#fff'
+        z: 1
+        height:dp(bottomHeight)
+        width:parent.width
+        anchors.bottom: parent.bottom
+        //border.width:  dp(1)
+        //border.color: Theme.alpha("#aaa", 0.26)
+
+        Rectangle {
+            color:'#fff'
+            height:dp(bottomHeight -30) //50
+        }
+
+        Label {
+            id: songPlaying
+            text: "没有正在播放的歌曲"
+            //anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            height:dp(bottomHeight - 40) //40
+            anchors.left: seeker.left
+            width:dp(100)
+        }
+
+        Slider {
+            id: seeker
+            width: parent.width - dp(50)
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            height:50
+            value: 0
+            //darkBackground: false
+            //updateValueWhileDragging: true
+            //color:theme.primaryColor
+            anchors.rightMargin: dp(50)
+            anchors.leftMargin:dp(50)
+            anchors.bottomMargin:dp(190)
+
+            onValueChanged: {
+                //TODO
+            }
+        }
+    }
+    Rectangle {
+        z:1
+        anchors.bottomMargin: dp(0)
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        height:dp(bottomHeight - 40) //40
+        width:dp(210)
+
+        Image {
+            id: previousArrow
+            source: "qrc:/images/av_skip_previous.svg"
+            height: 35
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            width: 70
+            fillMode: Image.PreserveAspectFit
+            Button {
+                id: previousButton
+                text: ""
+                onClicked: {
+
+                }
+                anchors.fill: parent
+                Material.background: "transparent"
+                Material.elevation: 1
+
+                //Layout.preferredWidth: 0
+                //Layout.fillWidth: true
+            }
+        }
+
+        Image {
+            id: playArrow
+            source: "qrc:/images/av_play_arrow.svg"
+            height: 35
+            anchors.left: previousArrow.right
+            anchors.bottom: parent.bottom
+            width: 70
+            fillMode: Image.PreserveAspectFit
+            Button {
+                id: playButton
+                text: ""
+                onClicked: {
+
+                }
+                anchors.fill: parent
+                Material.background: "transparent"
+                Material.elevation: 1
+
+                //Layout.preferredWidth: 0
+                //Layout.fillWidth: true
+            }
+        }
+
+        Image {
+            id: nextArrow
+            source: "qrc:/images/av_skip_next.svg"
+            height: 35
+            anchors.left: playArrow.right
+            anchors.bottom: parent.bottom
+            width: 70
+            fillMode: Image.PreserveAspectFit
+            Button {
+                id: nextButton
+                text: ""
+                onClicked: {
+                }
+                anchors.fill: parent
+                Material.background: "transparent"
+                Material.elevation: 1
+
+                //Layout.preferredWidth: 0
+                //Layout.fillWidth: true
+            }
+        }
+        /*
+        Image {
+            iconName: 'av/skip_previous'
+            height:dp(bottomHeight - 45) //35
+            width:dp(70)
+            id: prevButton
+            anchors.left: parent.left
+            size: dp(30)
+            onClicked: {
+
+            }
+        }
+
+        Image {
+            iconName: 'av/play_arrow'
+            height:dp(bottomHeight - 45) //35
+            width:dp(70)
+            id: playButton1
+            anchors.left: prevButton.right
+            size: dp(30)
+            onClicked: {
+
+            }
+
+        }
+
+        Image {
+            iconName: 'av/skip_next'
+            height:dp(bottomHeight - 45) //35
+            width:dp(70)
+            id: nextButton
+            anchors.left: playButton1.right
+            size: dp(30)
+
+            onClicked: {
+
+            }
+        }
+        */
+    }
+
+
 }

@@ -35,5 +35,9 @@
         <file>pages/PlayListUI.qml</file>
         <file>scripts/json.js</file>
         <file>scripts/SongList.js</file>
+        <file>images/av_pause.svg</file>
+        <file>images/av_play_arrow.svg</file>
+        <file>images/av_skip_next.svg</file>
+        <file>images/av_skip_previous.svg</file>
     </qresource>
 </RCC>

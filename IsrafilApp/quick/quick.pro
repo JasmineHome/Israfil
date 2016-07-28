@@ -1,12 +1,13 @@
 TEMPLATE = app
 TARGET = IsrafilApp
 
-QT += qml quick quickcontrols2
+QT += qml quick quickcontrols2 multimedia
 CONFIG += c++11 warn_off
 DESTDIR = $$BUILD_TREE/bin
 
 SOURCES += main.cpp \
-    israfilcoreqt.cpp
+    israfilcoreqt.cpp \
+    israfilplayer.cpp
 RESOURCES += \
     qml/qml.qrc
 
@@ -38,4 +39,5 @@ include(deployment.pri)
 #}
 
 HEADERS += \
-    israfilcoreqt.h
+    israfilcoreqt.h \
+    israfilplayer.h

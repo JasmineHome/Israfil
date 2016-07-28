@@ -34,7 +34,7 @@ Israfil App quick: Qt, QML, Material Design, **早期开发中**。
  - [ ] IsrafilApp
     - [ ] UI(QML)
        - [ ] **Qt5.7 QuickControls 2.0 UI界面**
-       - [ ] **QML MediaPlayer播放控制
+       - [x] **Qt MediaPlayer播放控制**
        - [x] Material Design界面初步
        - [ ] C++ 和 QML之间的caodan通讯 :(
  - [ ] IsrafilCore

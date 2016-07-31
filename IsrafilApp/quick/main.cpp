@@ -46,8 +46,12 @@ int main(int argc, char *argv[])
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
   IsrafilPlayer player;
-  player.setFileUrl("http://stream.qqmusic.tc.qq.com/105624143.mp3");
-  player.mediaPlay();
+  engine.rootContext()->setContextProperty("player", &player);
+
+  /*
+   * player.setFileUrl("http://stream.qqmusic.tc.qq.com/105624143.mp3");
+   * player.mediaPlay();
+   * /
   // QStringList plugins;
   // IsrafilCore *pIC = new IsrafilCore();
   // PluginMgr plmgr;

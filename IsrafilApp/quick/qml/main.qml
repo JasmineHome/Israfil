@@ -21,6 +21,7 @@ ApplicationWindow {
         property string style: "Universal"
     }
 
+
     IsrafilCoreQt {
         id: isrc
     }

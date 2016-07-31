@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
   /*
    * player.setFileUrl("http://stream.qqmusic.tc.qq.com/105624143.mp3");
    * player.mediaPlay();
-   * /
+   */
   // QStringList plugins;
   // IsrafilCore *pIC = new IsrafilCore();
   // PluginMgr plmgr;

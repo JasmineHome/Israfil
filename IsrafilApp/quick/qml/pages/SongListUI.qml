@@ -24,7 +24,13 @@ Item {
             width: parent.width
             onDoubleClicked: {
                 console.log("Double Clicked: "+ curSongIndex)
-                isrp.fileUrl = SLIL.getSongURLInSongList(curSongIndex)
+                isrp.mediaStop()
+                isrp.mediaRemove(0)
+
+                var curURL = SLIL.getSongURLInSongList(curSongIndex)
+                console.log(curURL)
+                isrp.changeFileUrl(curURL)
+                isrp.fileUrl = curURL
                 isrp.mediaPlay()
             }
         }

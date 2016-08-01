@@ -16,6 +16,11 @@ ApplicationWindow {
     property int bottomHeight: 80
     function dp(a) {return a;}
 
+    property int isrpProgress: isrp.progress
+    property int isrpDuration: isrp.duration
+    property int isrpMinute: isrp.minute
+    property int isrpSecond: isrp.second
+
     Settings {
         id: settings
         property string style: "Universal"
@@ -318,26 +323,27 @@ ApplicationWindow {
             //anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             height:dp(bottomHeight - 40) //40
-            anchors.left: seeker.left
+            anchors.left: sliderProgress.left
             width:dp(100)
         }
 
         Slider {
-            id: seeker
+            id: sliderProgress
             width: parent.width - dp(50)
 
             anchors.horizontalCenter: parent.horizontalCenter
             height:50
-            value: 0
-            //darkBackground: false
-            //updateValueWhileDragging: true
-            //color:theme.primaryColor
+            value: isrpProgress
+            from: 0
+            to: isrpDuration
+            //maximumValue: isrpDuration
+            //minimumValue: 0
             anchors.rightMargin: dp(50)
             anchors.leftMargin:dp(50)
             anchors.bottomMargin:dp(190)
 
             onValueChanged: {
-                //TODO
+                isrp.progress = value
             }
         }
     }

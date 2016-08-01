@@ -12,7 +12,8 @@ function fillSongListJson(userid) {
 
 function fillCurSongs(slid) {
     curSongListSongs = isrc.getSongsInSLD(slid)
-    console.log(curSongListSongs)
+    console.log("Double Clicked" + curSongListSongs)
+
 }
 
 function setSongListModel(userid) {
@@ -35,4 +36,10 @@ function setSongsModel(slid) {
         console.log(SLRoot[i].sName);
         songModel.append({"type":"ItemDelegate", "text":SLRoot[i].sName,"spec":"网易云音乐"});
     }
+}
+
+function getSongURLInSongList(ind) {
+    var jsonobj = JSON.parse(curSongListSongs);
+    var SLRoot = jsonobj["SongList"];
+    return SLRoot[ind].sMp3URLs[0].AudioURL;
 }

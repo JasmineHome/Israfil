@@ -45,8 +45,10 @@ int main(int argc, char *argv[])
 
   engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-  IsrafilPlayer player;
-  engine.rootContext()->setContextProperty("player", &player);
+  IsrafilCoreQt isrc;
+  engine.rootContext()->setContextProperty("isrc", &isrc);
+  IsrafilPlayer isrp;
+  engine.rootContext()->setContextProperty("isrp", &isrp);
 
   /*
    * player.setFileUrl("http://stream.qqmusic.tc.qq.com/105624143.mp3");
@@ -54,17 +56,6 @@ int main(int argc, char *argv[])
    */
   // QStringList plugins;
   // IsrafilCore *pIC = new IsrafilCore();
-  // PluginMgr plmgr;
-  // pIC->plmgr->LoadAllPlugins();
-  // pIC->plmgr->PassCoreToAllPlugins(pIC);
-  // foreach (PluginInterface *plugin, PluginLoader::plugins())
-  //    plugins += plugin->title();
-  // engine.rootContext()->setContextProperty("plugins", plmgr.GetPluginList());
-  // qDebug() << pIC->plmgr->GetPluginList();
-  // SongList *tmpSL = new SongList();
-  // tmpSL = pIC->SearchByName("test");
-  // qDebug() << tmpSL->at(0).UID <<endl;
-
 
   return app.exec();
 }

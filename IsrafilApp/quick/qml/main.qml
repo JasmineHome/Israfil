@@ -21,11 +21,6 @@ ApplicationWindow {
         property string style: "Universal"
     }
 
-
-    IsrafilCoreQt {
-        id: isrc
-    }
-
     header: ToolBar {
         Material.foreground: "white"
         Material.primary: "#03A9F4"
@@ -421,45 +416,6 @@ ApplicationWindow {
                 //Layout.fillWidth: true
             }
         }
-        /*
-        Image {
-            iconName: 'av/skip_previous'
-            height:dp(bottomHeight - 45) //35
-            width:dp(70)
-            id: prevButton
-            anchors.left: parent.left
-            size: dp(30)
-            onClicked: {
-
-            }
-        }
-
-        Image {
-            iconName: 'av/play_arrow'
-            height:dp(bottomHeight - 45) //35
-            width:dp(70)
-            id: playButton1
-            anchors.left: prevButton.right
-            size: dp(30)
-            onClicked: {
-
-            }
-
-        }
-
-        Image {
-            iconName: 'av/skip_next'
-            height:dp(bottomHeight - 45) //35
-            width:dp(70)
-            id: nextButton
-            anchors.left: playButton1.right
-            size: dp(30)
-
-            onClicked: {
-
-            }
-        }
-        */
     }
 
 

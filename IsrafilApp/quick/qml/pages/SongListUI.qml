@@ -16,16 +16,17 @@ Item {
     property string curSongListSongs: "";
     property string userid: "46123345";
 
-    IsrafilCoreQt {
-        id: isrc
-    }
-
     Component {
         id: itemDelegateComponent
 
         ItemDelegate {
             text: labelText
             width: parent.width
+            onDoubleClicked: {
+                console.log("Double Clicked: "+ curSongIndex)
+                isrp.fileUrl = SLIL.getSongURLInSongList(curSongIndex)
+                isrp.mediaPlay()
+            }
         }
     }
 

@@ -15,6 +15,7 @@ class IsrafilPlayer : public QObject {
   Q_PROPERTY(QString fileUrl WRITE setFileUrl NOTIFY fileUrlChanged)
   Q_PROPERTY(int second READ getSec NOTIFY progressChanged)
   Q_PROPERTY(int minute READ getMin NOTIFY progressChanged)
+  Q_PROPERTY(int state READ getState)
 
 public:
 
@@ -23,6 +24,7 @@ public:
   int  getVolume() const;
   int  getProgress() const;
   int  getDuration() const;
+  int  getState() const;
 
   // QString getTitle();
   int  getMin();

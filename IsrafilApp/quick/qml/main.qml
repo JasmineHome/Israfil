@@ -367,7 +367,7 @@ ApplicationWindow {
                 id: previousButton
                 text: ""
                 onClicked: {
-
+                    isrp.mediaPrevious()
                 }
                 anchors.fill: parent
                 Material.background: "transparent"
@@ -390,7 +390,13 @@ ApplicationWindow {
                 id: playButton
                 text: ""
                 onClicked: {
-
+                    if (isrp.state === 1){
+                        isrp.mediaPause();
+                        playArrow.source = "qrc:/images/av_play_arrow.svg"
+                    } else {
+                        isrp.mediaPlay();
+                        playArrow.source = "qrc:/images/av_pause.svg"
+                    }
                 }
                 anchors.fill: parent
                 Material.background: "transparent"
@@ -413,6 +419,7 @@ ApplicationWindow {
                 id: nextButton
                 text: ""
                 onClicked: {
+                    isrp.mediaNext()
                 }
                 anchors.fill: parent
                 Material.background: "transparent"

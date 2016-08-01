@@ -32,6 +32,7 @@ Item {
                 isrp.changeFileUrl(curURL)
                 isrp.fileUrl = curURL
                 isrp.mediaPlay()
+                playArrow.source = "qrc:/images/av_pause.svg"
             }
         }
     }

@@ -6,7 +6,7 @@ IsrafilPlayer::~IsrafilPlayer()
 IsrafilPlayer::IsrafilPlayer()
   : m_volume(50), m_progress(0)
 {
-  m_player   = new QMediaPlayer();
+  m_player   = new QMediaPlayer(this,QMediaPlayer::StreamPlayback);
   m_playlist = new QMediaPlaylist();
 
   m_player->setPlaylist(m_playlist);

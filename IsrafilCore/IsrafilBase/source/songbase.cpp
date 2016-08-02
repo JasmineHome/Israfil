@@ -54,9 +54,10 @@ string SongListToJson(SongList inSL)
     Value arrMp3URLs(kArrayType);
 
     for (int j = 0; j < inSL[i].sMp3URLs.size(); j++) {
-      Value Mp3URLItem(kObjectType);
-      Mp3URLItem.AddMember("AudioURL", SREF(inSL[i].sMp3URLs[j]), allocator);
-      arrMp3URLs.PushBack(Mp3URLItem, allocator);
+      // Value Mp3URLItem(kObjectType);
+      // Mp3URLItem.AddMember("AudioURL", SREF(inSL[i].sMp3URLs[j]), allocator);
+      // arrMp3URLs.PushBack(Mp3URLItem, allocator);
+      arrMp3URLs.PushBack(SREF(inSL[i].sMp3URLs[j]), allocator);
     }
     SongItem.AddMember("sMp3URLs", arrMp3URLs, allocator);
 

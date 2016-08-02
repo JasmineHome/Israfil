@@ -41,5 +41,5 @@ function setSongsModel(slid) {
 function getSongURLInSongList(ind) {
     var jsonobj = JSON.parse(curSongListSongs);
     var SLRoot = jsonobj["SongList"];
-    return SLRoot[ind].sMp3URLs[0].AudioURL;
+    return SLRoot[ind].sMp3URLs[0];
 }

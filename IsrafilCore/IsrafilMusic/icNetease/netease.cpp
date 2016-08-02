@@ -181,9 +181,9 @@ bool Netease::GetSongListDetail(std::string slID, SongListDetail& sld)
     tmpSB.uID     = Israfil::strfmt::Format("{0}{1}", srcNetease, tmpSB.sID);
     dbg(tmpSB.uID);
 
-
+    // TODO: select the highest rate;
     json::Value& hMusic = track["hMusic"];
-    //TODO: select the highest rate;
+
     if (hMusic.IsNull() == false) {
       std::string did = ITS(hMusic["dfsId"].GetUint64());
       tmpSB.sMp3URLs.push_back(Israfil::strfmt::Format(NESongCDN, encryptID(did), did, track["hMusic"]["extension"].GetString()));

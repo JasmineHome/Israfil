@@ -6,7 +6,7 @@ IsrafilPlayer::~IsrafilPlayer()
 IsrafilPlayer::IsrafilPlayer()
   : m_volume(50), m_progress(0)
 {
-  m_player   = new QMediaPlayer(this,QMediaPlayer::StreamPlayback);
+  m_player   = new QMediaPlayer(this, QMediaPlayer::StreamPlayback);
   m_playlist = new QMediaPlaylist();
 
   m_player->setPlaylist(m_playlist);
@@ -69,8 +69,11 @@ int IsrafilPlayer::getDuration() const
 int IsrafilPlayer::getState() const
 {
   auto mstate = m_player->state();
+
   if (mstate == QMediaPlayer::StoppedState) return 0;
+
   if (mstate == QMediaPlayer::PlayingState) return 1;
+
   if (mstate == QMediaPlayer::PausedState) return 2;
 }
 
@@ -114,7 +117,7 @@ void IsrafilPlayer::setFileUrl(QString url)
   m_fileUrl = url;
 }
 
-void IsrafilPlayer::setTitle(QString stitle)
+void IsrafilPlayer::changeTitle(QString stitle)
 {
   if (m_fileUrl.isNull()) m_title = "NO_SONG";
   else {

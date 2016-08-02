@@ -342,9 +342,10 @@ ApplicationWindow {
             anchors.leftMargin:dp(50)
             anchors.bottomMargin:dp(190)
 
-            onValueChanged: {
+            /*onValueChanged: {
                 isrp.progress = value
-            }
+            }*/
+
         }
     }
     Rectangle {

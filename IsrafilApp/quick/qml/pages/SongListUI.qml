@@ -31,6 +31,7 @@ Item {
                 console.log(curURL)
                 isrp.changeFileUrl(curURL)
                 isrp.fileUrl = curURL
+                songPlaying.text = songModel.get(curSongIndex).text
                 isrp.mediaPlay()
                 playArrow.source = "qrc:/images/av_pause.svg"
             }

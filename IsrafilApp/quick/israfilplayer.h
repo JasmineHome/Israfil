@@ -33,7 +33,6 @@ public:
   void setVolume(int volume);
   void setProgress(int progress);
   void setFileUrl(QString url);
-  void setTitle(QString stitle);
 
 private:
 
@@ -60,6 +59,7 @@ public slots:
   void changeProgress(int);
   void changeDuration(int);
   void changeFileUrl(QString);
+  void changeTitle(QString);
 
 signals:
 

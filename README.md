@@ -20,6 +20,7 @@ Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的�
 - IsrafilCore: (./IsrafilCore)纯C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**基本完成**  
 - Israfil App quick: 尝试用 QML 作UI, **开发中**。  
 - ~~_IsrafilCLI(暂停): (./IsrafilCLI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API 目前完成了网易和qq的搜索与下载地址获取_~~  
+
 ##### Github: [LER0ever/Israfil](https://github.com/LER0ever/Israfil)  
 ##### 国内镜像: [码云/LER/Israfil](http://git.oschina.net/ler/Israfil)
 
@@ -38,7 +39,7 @@ Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的�
        - [ ] **Qt5.7 QuickControls 2.0 UI界面**
        - [x] Qt MediaPlayer播放控制
        - [x] Material Design界面初步
-       - [ ] C++ 和 QML之间的caodan通讯 :(
+       - [x] C++ 和 QML之间的caodan通讯 :(
  - [ ] IsrafilCore
     - [ ] 网易云音乐
        - [x] 获取图片和歌词地址
@@ -61,7 +62,7 @@ Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的�
     - [x] HTTPClient
        - [x] 自定义header发送GET请求
        - [x] 自定义header进行HTTP POST, 初步的网易搜索获得json
- - [ ] IsrafilCLI (Golang 独立项目，**暂停**)
+ - [ ] IsrafilCLI (Golang 独立项目，**暂停，推迟**)
     - [x] 网易&QQ：搜索歌曲获得详细信息以及获得下载链接
     - [ ] 基于termui的命令行界面
     - [ ] termui的editbox实现
@@ -99,6 +100,7 @@ sudo apt-get -y update -qq
 sudo apt-get -y install qt57-meta-full
 ```
 - OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载安装包安装  
+
 ### 编译
 ```bash
 git clone https://github.com/LER0ever/Israfil

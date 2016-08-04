@@ -3,6 +3,7 @@
 #include <QQmlContext>
 #include <QSettings>
 #include <QQuickStyle>
+#include <QIcon>
 
 #include <QDebug>
 
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
   QGuiApplication::setOrganizationName("Void.LER0ever");
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QGuiApplication app(argc, argv);
+  app.setWindowIcon(QIcon("qrc:/images/israfil.ico"));
 
   // qmlRegisterType<BackendModel>("israfil", 1, 0, "BackendModel");
   QSettings settings;

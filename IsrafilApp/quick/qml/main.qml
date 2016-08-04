@@ -13,7 +13,7 @@ ApplicationWindow {
     height: 480
     visible: true
     title: "Israfil"
-    property int bottomHeight: 80
+    property int bottomHeight: 60
     function dp(a) {return a;}
 
     property int isrpProgress: isrp.progress
@@ -116,7 +116,7 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-        anchors.bottomMargin: bottomHeight
+        //anchors.bottomMargin: bottomHeight
 
         initialItem: Pane {
             id: pane
@@ -294,14 +294,16 @@ ApplicationWindow {
             Label {
                 width: aboutDialog.availableWidth
                 text: "In comparison to the desktop-oriented Qt Quick Controls 1, Qt Quick Controls 2 "
-                    + "are an order of magnitude simpler, lighter and faster, and are primarily targeted "
-                    + "towards embedded and mobile platforms."
+                      + "are an order of magnitude simpler, lighter and faster, and are primarily targeted "
+                      + "towards embedded and mobile platforms."
                 wrapMode: Label.Wrap
                 font.pixelSize: 12
             }
         }
     }
 
+
+    /*
     Rectangle {
         id: rectControls
         color:'#fff'
@@ -341,10 +343,6 @@ ApplicationWindow {
             anchors.rightMargin: dp(50)
             anchors.leftMargin:dp(50)
             anchors.bottomMargin:dp(190)
-
-            /*onValueChanged: {
-                isrp.progress = value
-            }*/
 
         }
     }
@@ -431,6 +429,121 @@ ApplicationWindow {
             }
         }
     }
+*/
+    footer: ToolBar {
+        Material.foreground: "#424242"
+        Material.primary: "white"
+        Material.accent: "#4CAF50"
+        height: bottonHeight +10
+        Label {
+            id: songPlaying
+            text: "没有正在播放的歌曲"
+            //anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            height:dp(bottomHeight - 40) //40
+            anchors.left: sliderProgress.left
+            width:dp(100)
+        }
 
+        Slider {
+            id: sliderProgress
+            width: parent.width - dp(50)
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            //height:30
+            value: isrpProgress
+            from: 0
+            to: isrpDuration
+            //maximumValue: isrpDuration
+            //minimumValue: 0
+            anchors.rightMargin: dp(50)
+            anchors.leftMargin:dp(50)
+            //anchors.bottom: songPlaying.top
+            anchors.bottom: songPlaying.top//Margin:dp(290)
+            anchors.bottomMargin: -5
+
+        }
+
+        Image {
+            id: previousArrow
+            source: "qrc:/images/av_skip_previous.svg"
+            height: 30
+            anchors.right: playArrow.left
+            anchors.bottom: parent.bottom
+            width: 70
+            fillMode: Image.PreserveAspectFit
+            Button {
+                id: previousButton
+                text: ""
+                onClicked: {
+                    isrp.mediaPrevious()
+                }
+                anchors.fill: parent
+                Material.background: "transparent"
+                Material.elevation: 1
+                Universal.background: "transparent"
+
+                //Layout.preferredWidth: 0
+                //Layout.fillWidth: true
+            }
+        }
+
+        Image {
+            id: playArrow
+            source: "qrc:/images/av_play_arrow.svg"
+            height: 30
+            //anchors.left: previousArrow.right
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            width: 70
+            fillMode: Image.PreserveAspectFit
+            Button {
+                id: playButton
+                text: ""
+                onClicked: {
+                    if (isrp.state === 1){
+                        isrp.mediaPause();
+                        playArrow.source = "qrc:/images/av_play_arrow.svg"
+                    } else {
+                        isrp.mediaPlay();
+                        playArrow.source = "qrc:/images/av_pause.svg"
+                    }
+                }
+                anchors.fill: parent
+                Material.background: "transparent"
+                Material.elevation: 1
+                Universal.background: "transparent"
+
+
+                //Layout.preferredWidth: 0
+                //Layout.fillWidth: true
+            }
+        }
+
+        Image {
+            id: nextArrow
+            source: "qrc:/images/av_skip_next.svg"
+            height: 30
+            anchors.left: playArrow.right
+            anchors.bottom: parent.bottom
+            width: 70
+            fillMode: Image.PreserveAspectFit
+            Button {
+                id: nextButton
+                text: ""
+                onClicked: {
+                    isrp.mediaNext()
+                }
+                anchors.fill: parent
+                Material.background: "transparent"
+                Material.elevation: 1
+                Universal.background: "transparent"
+
+
+                //Layout.preferredWidth: 0
+                //Layout.fillWidth: true
+            }
+        }
+    }
 
 }

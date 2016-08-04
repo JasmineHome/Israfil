@@ -39,5 +39,7 @@
         <file>images/av_play_arrow.svg</file>
         <file>images/av_skip_next.svg</file>
         <file>images/av_skip_previous.svg</file>
+        <file>images/israfil.png</file>
+        <file>images/israfil.ico</file>
     </qresource>
 </RCC>

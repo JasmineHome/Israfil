@@ -40,6 +40,13 @@ Page {
             width: swipeView.width
             height: swipeView.height
 
+            StackView {
+                id: searchStack
+                anchors.fill: parent
+
+                initialItem: Qt.resolvedUrl("qrc:/pages/SearchPageUI.qml")
+            }
+            /*
             Column {
                 spacing: 40
                 width: parent.width
@@ -56,7 +63,7 @@ Page {
                     source: "qrc:/images/arrows.png"
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
-            }
+            }*/
         }
         Pane {
             width: swipeView.width

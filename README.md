@@ -16,14 +16,16 @@ Project Israfil只是本人的练笔之作，为了熟悉一下Go语言和Qt的�
 如本项目有侵权行为，请和我联系，我会立刻删除Repo  
 
 ## 关于这个项目
-IsrafilCore: (./IsrafilCore)纯C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**开发中**  
-Israfil App quick: Qt, QML, Material Design, **早期开发中**。  
-~~_IsrafilCLI(暂停): (./IsrafilCLI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API 目前完成了网易和qq的搜索与下载地址获取_~~  
+- 目前支持的平台: Linux, Windows, macOS, Android. (按照兼容性从高到低)，(iOS和FreeBSD理论上支持)
+- IsrafilCore: (./IsrafilCore)纯C++11编写，提供音乐服务接口给IsrafilApp, 其他程序也可以自由调用此接口，**基本完成**  
+- Israfil App quick: 尝试用 QML 作UI, **开发中**。  
+- ~~_IsrafilCLI(暂停): (./IsrafilCLI)独立子项目，Go语言编写，Go-Pie插件机制，适合部署到服务器端提供统一的API 目前完成了网易和qq的搜索与下载地址获取_~~  
 ##### Github: [LER0ever/Israfil](https://github.com/LER0ever/Israfil)  
 ##### 国内镜像: [码云/LER/Israfil](http://git.oschina.net/ler/Israfil)
 
 ## Israfil 进度  
 ### **[开发日志及当前运行截图（持续更新）](https://github.com/LER0ever/Israfil/issues/3)**  
+### 目前已经可以边开发边用它听歌了！
 ### **没有人点上面的链接，所以这儿强行插一张截图：**
 左边为Windows Universal风格，右边为Material Design，可在P4设置中选择
 ![scnsht](http://i1.piimg.com/7134/2b3a78df28e9e4e9.png)
@@ -34,7 +36,7 @@ Israfil App quick: Qt, QML, Material Design, **早期开发中**。
  - [ ] IsrafilApp
     - [ ] UI(QML)
        - [ ] **Qt5.7 QuickControls 2.0 UI界面**
-       - [x] **Qt MediaPlayer播放控制**
+       - [x] Qt MediaPlayer播放控制
        - [x] Material Design界面初步
        - [ ] C++ 和 QML之间的caodan通讯 :(
  - [ ] IsrafilCore
@@ -89,14 +91,14 @@ Israfil App quick: Qt, QML, Material Design, **早期开发中**。
 
 ### 准备环境
 **由于用到了QtQuick.Controls 2.0 Qt最小要求版本为5.7**  
-Windows: Qt官网(qt.io)下载Qt For Windows并安装  
-Linux: 
+- Windows: Qt官网(qt.io)下载Qt For Windows并安装  
+- Linux: 
 ```bash
 sudo apt-add-repository --yes ppa:beineri/opt-qt57-trusty  
 sudo apt-get -y update -qq  
 sudo apt-get -y install qt57-meta-full
 ```
-OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载安装包安装  
+- OS X: ```brew install qt5``` (需要手动加入环境变量) 或者官网下载安装包安装  
 ### 编译
 ```bash
 git clone https://github.com/LER0ever/Israfil

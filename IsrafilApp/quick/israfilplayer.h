@@ -34,6 +34,9 @@ public:
   void setProgress(int progress);
   void setFileUrl(QString url);
 
+  Q_INVOKABLE void insertMedia(QString, int);
+  Q_INVOKABLE void deleteMedia(int);
+
 private:
 
   QMediaPlayer   *m_player;
@@ -60,6 +63,8 @@ public slots:
   void changeDuration(int);
   void changeFileUrl(QString);
   void changeTitle(QString);
+  //
+
 
 signals:
 

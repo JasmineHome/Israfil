@@ -4,6 +4,7 @@
 IsrafilCoreQt::IsrafilCoreQt(QObject *parent) : QObject(parent)
 {
   pIC = new Israfil::Core::IsrafilCore();
+
 }
 
 QString IsrafilCoreQt::searchSong(QString Name)

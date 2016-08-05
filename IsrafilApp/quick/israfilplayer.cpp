@@ -152,3 +152,21 @@ void IsrafilPlayer::changeFileUrl(QString url)
   m_fileUrl = url;
   emit fileUrlChanged();
 }
+
+void IsrafilPlayer::insertMedia(QString URL, int ind = -1)
+{
+  if (ind == -1) {
+    m_playlist->addMedia(QUrl(URL));
+  } else {
+    m_playlist->insertMedia(ind, QUrl(URL));
+  }
+}
+
+void IsrafilPlayer::deleteMedia(int ind)
+{
+    if (ind == -1)//delete all
+        m_playlist->removeMedia(0, m_playlist->mediaCount());
+    else {
+        m_playlist->removeMedia(ind);
+    }
+}

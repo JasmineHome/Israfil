@@ -6,6 +6,7 @@ import QtQuick.Controls.Universal 2.0
 import Qt.labs.settings 1.0
 
 import IsrafilCore 1.0
+import "scripts/const.js" as CONST
 
 ApplicationWindow {
     id: mainwindow
@@ -71,7 +72,16 @@ ApplicationWindow {
 
                     MenuItem {
                         text: "Settings"
-                        onTriggered: settingsPopup.open()
+                        onTriggered: {
+                            titleLabel.text = "Settings"
+                            listView.currentIndex = listView.count -1
+                            stackView.replace("qrc:/pages/SettingsUI.qml")
+                        }
+                    }
+
+                    MenuItem {
+                        text: "Style"
+                        onTriggered: stylesPopup.open()
                     }
                     MenuItem {
                         text: "About"
@@ -108,6 +118,8 @@ ApplicationWindow {
 
             model: ListModel {
                 ListElement { title: "Israfil Main"; source: "qrc:/pages/TabBar.qml" }
+                ListElement { title: "Downloads"; source: "qrc:/pages/DownloadsUI.qml"}
+                ListElement { title: "Settings"; source: "qrc:/pages/SettingsUI.qml"}
             }
 
             ScrollIndicator.vertical: ScrollIndicator { }
@@ -155,47 +167,24 @@ ApplicationWindow {
                     }
                 }
             }
-            /*
-            Image {
-                id: arrowtest
-                source: "qrc:/images/arrow.png"
-                anchors.left: parent.left
-                anchors.leftMargin: 30
-                anchors.bottom: parent.bottom
-                Button {
-                    id: testButton
-                    text: ""
-                    onClicked: {
-                        styleBox.currentIndex = styleBox.styleIndex
-                        settingsPopup.close()
-                    }
-                    anchors.fill: parent
-                    Material.background: "transparent"
-                    Material.elevation: 1
-
-                    //Layout.preferredWidth: 0
-                    //Layout.fillWidth: true
-                }
-            }
-            */
         }
     }
 
     Popup {
-        id: settingsPopup
+        id: stylesPopup
         x: (mainwindow.width - width) / 2
         y: mainwindow.height / 6
         width: Math.min(mainwindow.width, mainwindow.height) / 3 * 2
         height: settingsColumn.implicitHeight + topPadding + bottomPadding
         modal: true
         focus: true
-
-        contentItem: ColumnLayout {
+        contentItem:
+            ColumnLayout {
             id: settingsColumn
             spacing: 20
 
             Label {
-                text: "Settings"
+                text: "Styles"
                 font.bold: true
             }
 
@@ -203,7 +192,7 @@ ApplicationWindow {
                 spacing: 10
 
                 Label {
-                    text: "Style:"
+                    text: "Theme:"
                 }
 
                 ComboBox {
@@ -237,7 +226,7 @@ ApplicationWindow {
                     text: "Ok"
                     onClicked: {
                         settings.style = styleBox.displayText
-                        settingsPopup.close()
+                        stylesPopup.close()
                     }
 
                     Material.foreground: Material.primary
@@ -253,7 +242,7 @@ ApplicationWindow {
                     text: "Cancel"
                     onClicked: {
                         styleBox.currentIndex = styleBox.styleIndex
-                        settingsPopup.close()
+                        stylesPopup.close()
                     }
 
                     Material.background: "transparent"
@@ -264,6 +253,7 @@ ApplicationWindow {
                 }
             }
         }
+
     }
 
     Popup {
@@ -280,161 +270,30 @@ ApplicationWindow {
             spacing: 20
 
             Label {
-                text: "About"
+                text: "About Israfil"
                 font.bold: true
             }
 
             Label {
                 width: aboutDialog.availableWidth
-                text: "From QtQuick Demo: The Qt Quick Controls 2 module delivers the next generation user interface controls based on Qt Quick."
+                text: CONST.ABOUT_TEXT_1
                 wrapMode: Label.Wrap
                 font.pixelSize: 12
             }
 
             Label {
                 width: aboutDialog.availableWidth
-                text: "In comparison to the desktop-oriented Qt Quick Controls 1, Qt Quick Controls 2 "
-                      + "are an order of magnitude simpler, lighter and faster, and are primarily targeted "
-                      + "towards embedded and mobile platforms."
+                text: CONST.ABOUT_TEXT_2
                 wrapMode: Label.Wrap
                 font.pixelSize: 12
             }
         }
     }
-
-
-    /*
-    Rectangle {
-        id: rectControls
-        color:'#fff'
-        z: 1
-        height:dp(bottomHeight)
-        width:parent.width
-        anchors.bottom: parent.bottom
-        //border.width:  dp(1)
-        //border.color: Theme.alpha("#aaa", 0.26)
-
-        Rectangle {
-            color:'#fff'
-            height:dp(bottomHeight -30) //50
-        }
-
-        Label {
-            id: songPlaying
-            text: "没有正在播放的歌曲"
-            //anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            height:dp(bottomHeight - 40) //40
-            anchors.left: sliderProgress.left
-            width:dp(100)
-        }
-
-        Slider {
-            id: sliderProgress
-            width: parent.width - dp(50)
-
-            anchors.horizontalCenter: parent.horizontalCenter
-            height:50
-            value: isrpProgress
-            from: 0
-            to: isrpDuration
-            //maximumValue: isrpDuration
-            //minimumValue: 0
-            anchors.rightMargin: dp(50)
-            anchors.leftMargin:dp(50)
-            anchors.bottomMargin:dp(190)
-
-        }
-    }
-    Rectangle {
-        z:1
-        anchors.bottomMargin: dp(0)
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        height:dp(bottomHeight - 40) //40
-        width:dp(210)
-
-        Image {
-            id: previousArrow
-            source: "qrc:/images/av_skip_previous.svg"
-            height: 35
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            width: 70
-            fillMode: Image.PreserveAspectFit
-            Button {
-                id: previousButton
-                text: ""
-                onClicked: {
-                    isrp.mediaPrevious()
-                }
-                anchors.fill: parent
-                Material.background: "transparent"
-                Material.elevation: 1
-
-                //Layout.preferredWidth: 0
-                //Layout.fillWidth: true
-            }
-        }
-
-        Image {
-            id: playArrow
-            source: "qrc:/images/av_play_arrow.svg"
-            height: 35
-            anchors.left: previousArrow.right
-            anchors.bottom: parent.bottom
-            width: 70
-            fillMode: Image.PreserveAspectFit
-            Button {
-                id: playButton
-                text: ""
-                onClicked: {
-                    if (isrp.state === 1){
-                        isrp.mediaPause();
-                        playArrow.source = "qrc:/images/av_play_arrow.svg"
-                    } else {
-                        isrp.mediaPlay();
-                        playArrow.source = "qrc:/images/av_pause.svg"
-                    }
-                }
-                anchors.fill: parent
-                Material.background: "transparent"
-                Material.elevation: 1
-
-                //Layout.preferredWidth: 0
-                //Layout.fillWidth: true
-            }
-        }
-
-        Image {
-            id: nextArrow
-            source: "qrc:/images/av_skip_next.svg"
-            height: 35
-            anchors.left: playArrow.right
-            anchors.bottom: parent.bottom
-            width: 70
-            fillMode: Image.PreserveAspectFit
-            Button {
-                id: nextButton
-                text: ""
-                onClicked: {
-                    isrp.mediaNext()
-                }
-                anchors.fill: parent
-                Material.background: "transparent"
-                Material.elevation: 1
-
-                //Layout.preferredWidth: 0
-                //Layout.fillWidth: true
-            }
-        }
-    }
-*/
     footer: ToolBar {
         Material.foreground: "#424242"
         Material.primary: "white"
         Material.accent: "#4CAF50"
-        height: bottonHeight +10
+        height: bottomHeight -10
         Label {
             id: songPlaying
             text: "没有正在播放的歌曲"

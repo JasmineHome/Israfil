@@ -14,7 +14,7 @@ Item {
 
     property string userSongListInfo: "";
     property string curSongListSongs: "";
-    property string userid: "46123345";
+    property string userid: "48353"; //丁磊的ID :)
 
     Component {
         id: itemDelegateComponent
@@ -28,6 +28,7 @@ Item {
                 isrp.mediaRemove(0)
 
                 var curURL = SLIL.getSongURLInSongList(curSongIndex)
+
                 console.log(curURL)
                 isrp.changeFileUrl(curURL)
                 isrp.fileUrl = curURL

@@ -41,5 +41,9 @@
         <file>images/av_skip_previous.svg</file>
         <file>images/israfil.png</file>
         <file>images/israfil.ico</file>
+        <file>scripts/PlayList.js</file>
+        <file>pages/SettingsUI.qml</file>
+        <file>pages/DownloadsUI.qml</file>
+        <file>scripts/const.js</file>
     </qresource>
 </RCC>

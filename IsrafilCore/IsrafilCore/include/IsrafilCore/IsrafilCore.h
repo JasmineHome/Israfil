@@ -1,3 +1,13 @@
+/*=============================================================================
+#     FileName: IsrafilCore.h
+#         Desc: IsrafilCore Main Header, should be included instead of sub headers
+#       Author: LER0ever
+#        Email: etasry@gmail.com
+#     HomePage: http://yirong.ml
+#      Version: 0.0.1
+#   LastChange: 2016-08-13 12:17:12
+#      History:
+=============================================================================*/
 #ifndef ISRAFILCORE_H
 #define ISRAFILCORE_H
 
@@ -20,6 +30,7 @@ public:
   SongList SearchSong(std::string strName);
   SongListInfoList GetUserSongList(std::string strUserID);
   SongList GetSongsInSLD(std::string strSongListID);
+  Song GetAltSong(Song Orig);
 
 private:
 

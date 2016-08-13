@@ -1,3 +1,13 @@
+/*=============================================================================
+#     FileName: qqmusic.h
+#         Desc:
+#       Author: LER0ever
+#        Email: etasry@gmail.com
+#     HomePage: http://yirong.ml
+#      Version: 0.0.1
+#   LastChange: 2016-08-12 12:11:45
+#      History:
+=============================================================================*/
 #ifndef QQMUSIC_H
 #define QQMUSIC_H
 #include "base.h"
@@ -22,6 +32,7 @@ public:
   bool        FillLyricsURL(Song& rSongBase);
   std::string GetLyricsURL(Song& rSongBase);
   std::string GetLyrics(Song& rSongBase);
+
 
 private:
 
